@@ -10,4 +10,5 @@ const MainContainer = styled.div`
   background-color: red;
   max-width: 396px;
   margin: 0 auto;
+  height: 100vh;
 `;
