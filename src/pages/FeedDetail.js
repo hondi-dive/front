@@ -1,13 +1,25 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import TopNav from 'components/TopNav';
 import { shareKakao } from 'utils/shareKakao';
+import { fetchDetailLog } from 'apis/points';
 
 const FeedDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [detail, setDetail] = useState();
+
+  const loadDetailLog = async () => {
+    const res = await fetchDetailLog(id);
+
+    setDetail(res);
+  };
+
+  useEffect(() => {
+    loadDetailLog();
+  }, [id]);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -16,6 +28,26 @@ const FeedDetail = () => {
     document.body.appendChild(script);
     return () => document.body.removeChild(script);
   }, []);
+
+  if (!detail) {
+    return <div />;
+  }
+
+  console.log(detail);
+
+  const dsa = (name) => {
+    console.log(name);
+
+    if (name === 'SCUBA') {
+      return '스쿠버';
+    }
+    if (name === 'SNORKEL') {
+      return '스노클';
+    }
+    if (name === 'FREEDIVING') {
+      return '프리다이빙';
+    }
+  };
 
   return (
     <Container>
@@ -28,11 +60,11 @@ const FeedDetail = () => {
       />
       <FeedContainer>
         <FeedProfile>
-          <FeedProfileImage src="https://cdn.pixabay.com/photo/2017/10/24/21/49/playing-cards-2886284_1280.png" />
-          <FeedProfileName>CHERSISHER</FeedProfileName>
+          <FeedProfileImage src={detail.imgUrl} />
+          <FeedProfileName>{detail.userName}</FeedProfileName>
         </FeedProfile>
         <FeedContent>
-          <img src="/img/sample-feed.png" width="100%" />
+          <img src={detail.imgUrl} width="100%" />
         </FeedContent>
         <div
           style={{
@@ -49,7 +81,7 @@ const FeedDetail = () => {
               marginRight: 17,
             }}
           >
-            🥽 스쿠버다이빙
+            🥽 {dsa(detail.category)}
           </div>
           <img
             src="/img/active-star.svg"
@@ -60,7 +92,7 @@ const FeedDetail = () => {
             }}
           />
           <div>
-            <span style={{ color: '#327AEB' }}>4</span>/5점
+            <span style={{ color: '#327AEB' }}>{detail.star}</span>/5점
           </div>
         </div>
         <div
@@ -69,7 +101,7 @@ const FeedDetail = () => {
             marginBottom: 86,
           }}
         >
-          홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합
+          {detail.text}
         </div>
       </FeedContainer>
       <div

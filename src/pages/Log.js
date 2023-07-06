@@ -1,26 +1,27 @@
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import TopNav from 'components/TopNav';
 import Section from 'components/pages/write/Section';
+import { fetchDetailLog } from 'apis/points';
 
 const Log = () => {
-  const data = {
-    afterIntake: 2,
-    beforeIntake: 2,
-    category: 'SCUBA',
-    date: 1,
-    decompression: 2,
-    deepFlow: 'MIDDLE',
-    diveEntry: 'BOAT',
-    diveTime: 2,
-    eyesight: 2,
-    maxDepth: 20,
-    pointDepth: 12,
-    pointId: 1,
-    star: 5,
-    surfaceFlow: 'MIDDLE',
-    temp: 10,
-    text: 'a',
-    waterTemp: 4,
+  const [detail, setDetail] = useState();
+  const { id } = useParams();
+
+  const loadDetailLog = async () => {
+    const res = await fetchDetailLog(id);
+
+    setDetail(res);
   };
+
+  useEffect(() => {
+    loadDetailLog();
+  }, [id]);
+
+  if (!detail) {
+    return <div />;
+  }
 
   return (
     <div
@@ -45,7 +46,7 @@ const Log = () => {
             marginRight: 12,
           }}
         />
-        <div>ddsadsadsa</div>
+        <div>{detail.userName}</div>
       </div>
       <Section title="날짜">
         <div
@@ -60,7 +61,7 @@ const Log = () => {
             padding: 12,
           }}
         >
-          2023년
+          {detail.date.slice(0, 10)}
         </div>
       </Section>
       <Section title="입수형태">
@@ -79,10 +80,10 @@ const Log = () => {
             <div
               style={{
                 padding: '12px 0',
-                backgroundColor: item.value === data.diveEntry ? '#8FB4FE' : 'white',
+                backgroundColor: item.value === detail.diveEntry ? '#8FB4FE' : 'white',
                 width: '106px',
                 textAlign: 'center',
-                color: item.value === data.diveEntry ? 'white' : '#7F7F7F',
+                color: item.value === detail.diveEntry ? 'white' : '#7F7F7F',
                 borderRadius: 8,
                 boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               }}
@@ -108,10 +109,10 @@ const Log = () => {
             <div
               style={{
                 padding: '12px 0',
-                backgroundColor: item.value === data.surfaceFlow ? '#8FB4FE' : 'white',
+                backgroundColor: item.value === detail.surfaceFlow ? '#8FB4FE' : 'white',
                 width: '106px',
                 textAlign: 'center',
-                color: item.value === data.surfaceFlow ? 'white' : '#7F7F7F',
+                color: item.value === detail.surfaceFlow ? 'white' : '#7F7F7F',
                 borderRadius: 8,
                 boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               }}
@@ -137,10 +138,10 @@ const Log = () => {
             <div
               style={{
                 padding: '12px 0',
-                backgroundColor: item.value === data.deepFlow ? '#8FB4FE' : 'white',
+                backgroundColor: item.value === detail.deepFlow ? '#8FB4FE' : 'white',
                 width: '106px',
                 textAlign: 'center',
-                color: item.value === data.deepFlow ? 'white' : '#7F7F7F',
+                color: item.value === detail.deepFlow ? 'white' : '#7F7F7F',
                 borderRadius: 8,
                 boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               }}
@@ -150,195 +151,205 @@ const Log = () => {
           ))}
         </div>
       </Section>
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-        }}
-      >
-        <div style={{ marginRight: 17, width: '100%' }}>
-          <Section title="수온">
-            <div
-              style={{
-                backgroundColor: '#F8F8F8',
-                padding: '15px 0',
-                maxWidth: '164px',
-                width: '100%',
-                textAlign: 'center',
-                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-                fontSize: 18,
-                fontWeight: 500,
-                borderRadius: 8,
-              }}
-            >
-              {data.waterTemp}℃
-            </div>
-          </Section>
-        </div>
-        <Section title="기온">
-          <div
-            style={{
-              backgroundColor: '#F8F8F8',
-              padding: '15px 0',
-              maxWidth: '164px',
-              width: '100%',
-              textAlign: 'center',
-              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              fontSize: 18,
-              fontWeight: 500,
-              borderRadius: 8,
-            }}
-          >
-            {data.temp}℃
-          </div>
-        </Section>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-        }}
-      >
-        <div style={{ marginRight: 17, width: '100%' }}>
-          <Section title="입수전 잔량">
-            <div
-              style={{
-                backgroundColor: '#F8F8F8',
-                padding: '15px 0',
-                maxWidth: '164px',
-                width: '100%',
-                textAlign: 'center',
-                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-                fontSize: 18,
-                fontWeight: 500,
-                borderRadius: 8,
-              }}
-            >
-              {data.beforeIntake + 'bar'}
-            </div>
-          </Section>
-        </div>
-        <Section title="입수후 잔량">
-          <div
-            style={{
-              backgroundColor: '#F8F8F8',
-              padding: '15px 0',
-              maxWidth: '164px',
-              width: '100%',
-              textAlign: 'center',
-              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              fontSize: 18,
-              fontWeight: 500,
-              borderRadius: 8,
-            }}
-          >
-            {data.afterIntake + 'bar'}
-          </div>
-        </Section>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-        }}
-      >
-        <div style={{ marginRight: 17, width: '100%' }}>
-          <Section title="다이브 최고수심">
-            <div
-              style={{
-                backgroundColor: '#F8F8F8',
-                padding: '15px 0',
-                maxWidth: '164px',
-                width: '100%',
-                textAlign: 'center',
-                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-                fontSize: 18,
-                fontWeight: 500,
-                borderRadius: 8,
-              }}
-            >
-              {data.maxDepth + 'm'}
-            </div>
-          </Section>
-        </div>
-        <Section title="포인트 수심">
-          <div
-            style={{
-              backgroundColor: '#F8F8F8',
-              padding: '15px 0',
-              maxWidth: '164px',
-              width: '100%',
-              textAlign: 'center',
-              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              fontSize: 18,
-              fontWeight: 500,
-              borderRadius: 8,
-            }}
-          >
-            {data.pointDepth + 'm'}
-          </div>
-        </Section>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-        }}
-      >
-        <div style={{ marginRight: 17, width: '100%' }}>
-          <Section title="다이빙 시간">
-            <div
-              style={{
-                backgroundColor: '#F8F8F8',
-                padding: '15px 0',
-                maxWidth: '164px',
-                width: '100%',
-                textAlign: 'center',
-                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-                fontSize: 18,
-                fontWeight: 500,
-                borderRadius: 8,
-              }}
-            >
-              {data.diveTime + 'm'}
-            </div>
-          </Section>
-        </div>
-        <Section title="감압 시간">
-          <div
-            style={{
-              backgroundColor: '#F8F8F8',
-              padding: '15px 0',
-              maxWidth: '164px',
-              width: '100%',
-              textAlign: 'center',
-              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              fontSize: 18,
-              fontWeight: 500,
-              borderRadius: 8,
-            }}
-          >
-            {data.decompression + 'm'}
-          </div>
-        </Section>
-      </div>
-      <Section title="시야">
+      {detail.waterTemp && (
         <div
           style={{
-            backgroundColor: '#F8F8F8',
-            padding: '15px 0',
-
+            display: 'flex',
             width: '100%',
-            textAlign: 'center',
-            boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-            fontSize: 18,
-            fontWeight: 500,
-            borderRadius: 8,
           }}
         >
-          {data.eyesight + 'm'}
+          <div style={{ marginRight: 17, width: '100%' }}>
+            <Section title="수온">
+              <div
+                style={{
+                  backgroundColor: '#F8F8F8',
+                  padding: '15px 0',
+                  maxWidth: '164px',
+                  width: '100%',
+                  textAlign: 'center',
+                  boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                  fontSize: 18,
+                  fontWeight: 500,
+                  borderRadius: 8,
+                }}
+              >
+                {detail.waterTemp}℃
+              </div>
+            </Section>
+          </div>
+          <Section title="기온">
+            <div
+              style={{
+                backgroundColor: '#F8F8F8',
+                padding: '15px 0',
+                maxWidth: '164px',
+                width: '100%',
+                textAlign: 'center',
+                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                fontSize: 18,
+                fontWeight: 500,
+                borderRadius: 8,
+              }}
+            >
+              {detail.temp}℃
+            </div>
+          </Section>
         </div>
-      </Section>
+      )}
+      {detail.beforeIntake && (
+        <div
+          style={{
+            display: 'flex',
+            width: '100%',
+          }}
+        >
+          <div style={{ marginRight: 17, width: '100%' }}>
+            <Section title="입수전 잔량">
+              <div
+                style={{
+                  backgroundColor: '#F8F8F8',
+                  padding: '15px 0',
+                  maxWidth: '164px',
+                  width: '100%',
+                  textAlign: 'center',
+                  boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                  fontSize: 18,
+                  fontWeight: 500,
+                  borderRadius: 8,
+                }}
+              >
+                {detail.beforeIntake + 'bar'}
+              </div>
+            </Section>
+          </div>
+          <Section title="입수후 잔량">
+            <div
+              style={{
+                backgroundColor: '#F8F8F8',
+                padding: '15px 0',
+                maxWidth: '164px',
+                width: '100%',
+                textAlign: 'center',
+                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                fontSize: 18,
+                fontWeight: 500,
+                borderRadius: 8,
+              }}
+            >
+              {detail.afterIntake + 'bar'}
+            </div>
+          </Section>
+        </div>
+      )}
+      {detail.maxDepth && (
+        <div
+          style={{
+            display: 'flex',
+            width: '100%',
+          }}
+        >
+          <div style={{ marginRight: 17, width: '100%' }}>
+            <Section title="다이브 최고수심">
+              <div
+                style={{
+                  backgroundColor: '#F8F8F8',
+                  padding: '15px 0',
+                  maxWidth: '164px',
+                  width: '100%',
+                  textAlign: 'center',
+                  boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                  fontSize: 18,
+                  fontWeight: 500,
+                  borderRadius: 8,
+                }}
+              >
+                {detail.maxDepth + 'm'}
+              </div>
+            </Section>
+          </div>
+          <Section title="포인트 수심">
+            <div
+              style={{
+                backgroundColor: '#F8F8F8',
+                padding: '15px 0',
+                maxWidth: '164px',
+                width: '100%',
+                textAlign: 'center',
+                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                fontSize: 18,
+                fontWeight: 500,
+                borderRadius: 8,
+              }}
+            >
+              {detail.pointDepth + 'm'}
+            </div>
+          </Section>
+        </div>
+      )}
+      {detail.diveTime && (
+        <div
+          style={{
+            display: 'flex',
+            width: '100%',
+          }}
+        >
+          <div style={{ marginRight: 17, width: '100%' }}>
+            <Section title="다이빙 시간">
+              <div
+                style={{
+                  backgroundColor: '#F8F8F8',
+                  padding: '15px 0',
+                  maxWidth: '164px',
+                  width: '100%',
+                  textAlign: 'center',
+                  boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                  fontSize: 18,
+                  fontWeight: 500,
+                  borderRadius: 8,
+                }}
+              >
+                {detail.diveTime + 'm'}
+              </div>
+            </Section>
+          </div>
+          <Section title="감압 시간">
+            <div
+              style={{
+                backgroundColor: '#F8F8F8',
+                padding: '15px 0',
+                maxWidth: '164px',
+                width: '100%',
+                textAlign: 'center',
+                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                fontSize: 18,
+                fontWeight: 500,
+                borderRadius: 8,
+              }}
+            >
+              {detail.decompression + 'm'}
+            </div>
+          </Section>
+        </div>
+      )}
+      {detail.eyesight && (
+        <Section title="시야">
+          <div
+            style={{
+              backgroundColor: '#F8F8F8',
+              padding: '15px 0',
+
+              width: '100%',
+              textAlign: 'center',
+              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+              fontSize: 18,
+              fontWeight: 500,
+              borderRadius: 8,
+            }}
+          >
+            {detail.eyesight + 'm'}
+          </div>
+        </Section>
+      )}
     </div>
   );
 };

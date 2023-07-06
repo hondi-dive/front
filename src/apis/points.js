@@ -31,3 +31,9 @@ export const fetchFeed = async (id, filter) => {
     return res;
   }
 };
+
+export const fetchDetailLog = async (id) => {
+  const res = await axios.get(`/diveposts/${id}/detail`);
+
+  return res;
+};

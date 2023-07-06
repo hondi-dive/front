@@ -150,7 +150,7 @@ const Feed = () => {
                 key={image.id}
                 src={image.imgUrl}
                 onClick={() => {
-                  navigate(`/logs/${image.id}`);
+                  navigate(`/feed/${image.id}`);
                 }}
               />
             ))}
