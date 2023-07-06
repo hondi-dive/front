@@ -7,7 +7,7 @@ const DefaultLayout = ({ router }) => {
 export default DefaultLayout;
 
 const MainContainer = styled.div`
-  max-width: 396px;
+  max-width: 393px;
   margin: 0 auto;
   height: 100vh;
 `;

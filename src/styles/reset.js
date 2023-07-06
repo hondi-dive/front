@@ -29,6 +29,10 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
+button{
+	border: 0;
+	outline: 0;
+}
 ol, ul {
 	list-style: none;
 }
@@ -43,6 +47,11 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+*,
+::before,
+::after {
+  box-sizing: border-box;
 }
 @font-face {
 	font-family: 'SlowSlow';
