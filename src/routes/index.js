@@ -8,16 +8,18 @@ import FeedDetail from 'pages/FeedDetail';
 import Write from 'pages/Write';
 import Log from 'pages/Log';
 
+const staticServerUri = process.env.REACT_APP_PATH || '';
+
 const RoutesContainer = () => {
   return (
     <Routes>
-      <Route path="/" element={<Main />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/points" element={<Points />} />
-      <Route path="/feed" element={<Feed />} />
-      <Route path="/feed/:id" element={<FeedDetail />} />
-      <Route path="/logs/:id" element={<Log />} />
-      <Route path="/write" element={<Write />} />
+      <Route path={staticServerUri + '/'} element={<Main />} />
+      <Route path={staticServerUri + '/login'} element={<Login />} />
+      <Route path={staticServerUri + '/points'} element={<Points />} />
+      <Route path={staticServerUri + '/feed'} element={<Feed />} />
+      <Route path={staticServerUri + '/feed/:id'} element={<FeedDetail />} />
+      <Route path={staticServerUri + '/logs/:id'} element={<Log />} />
+      <Route path={staticServerUri + '/write'} element={<Write />} />
     </Routes>
   );
 };
