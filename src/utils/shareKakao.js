@@ -1,4 +1,5 @@
-export const shareKakao = () => {
+export const shareKakao = (img) => {
+  console.log(img);
   if (window.Kakao) {
     const kakao = window.Kakao;
     if (!kakao.isInitialized()) {
@@ -10,8 +11,7 @@ export const shareKakao = () => {
       content: {
         title: 'dd', // 인자값으로 받은 title
         description: '설명',
-        imageUrl:
-          'https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
+        imageUrl: img,
         link: {
           mobileWebUrl: 'https://developers.kakao.com',
           webUrl: 'https://developers.kakao.com',

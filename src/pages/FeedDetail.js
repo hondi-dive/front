@@ -55,7 +55,8 @@ const FeedDetail = () => {
         title="광치기 해변"
         actionName="공유하기"
         action={() => {
-          shareKakao();
+          const img = detail.imgUrl;
+          shareKakao(img);
         }}
       />
       <FeedContainer>

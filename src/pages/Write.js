@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { createPoint } from 'apis/points';
 import TopNav from 'components/TopNav';
@@ -7,6 +8,7 @@ import KakaoMap from 'components/pages/map/KakaoMap';
 
 const Write = () => {
   const inputRef = useRef(null);
+  const navigate = useNavigate();
 
   const [isMap, setIsMap] = useState(false);
   const [imgFile, setImgFile] = useState();
@@ -134,6 +136,7 @@ const Write = () => {
         actionName="저장"
         action={() => {
           onFinish();
+          navigate(`/points`);
         }}
       />
       <div
