@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import KakaoMap from 'components/pages/map/KakaoMap';
 import SearchPoint, { StyledInput } from 'components/pages/map/SearchPoint';
-
+import BottomNav from 'components/BottomNav';
 const Points = () => {
   return (
     <div
@@ -13,11 +13,12 @@ const Points = () => {
 
       <KakaoMap />
       <SearchPoint />
-      <Link to="/write">
+      {/* <Link to="/write">
         <StyledButton>
           + 나의 로그 작성하기
         </StyledButton>
-      </Link>
+      </Link> */}
+      <BottomNav />
     </div>
   );
 };
