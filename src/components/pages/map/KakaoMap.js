@@ -3,14 +3,16 @@ import React, { useEffect } from 'react';
 const KakaoMap = () => {
   useEffect(() => {
     if (typeof window.kakao !== 'undefined' && window.kakao.maps) {
-      const mapContainer = document.getElementById('map');
-      const mapOption = {
-        center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3,
-      };
+        let markers = [];
+        const mapContainer = document.getElementById('map');
+        const mapOption = {
+            center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+            level: 3,
+        };
 
       const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
+        
     let positions = [
         {
             content: '<div>판포포구</div>', 
@@ -101,6 +103,7 @@ const KakaoMap = () => {
         width: '411px',
         height: '800px',
         margin: '0 auto',
+        position: 'relative',
       }}
     ></div>
   );

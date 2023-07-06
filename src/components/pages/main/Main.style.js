@@ -33,3 +33,9 @@ export const SignupNotice = styled.div`
   color: white;
   font-size: 14px;
 `;
+
+export const SocialLoginContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;

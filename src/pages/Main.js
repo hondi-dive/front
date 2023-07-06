@@ -17,6 +17,10 @@ const Main = () => {
         <S.Title>이거바당</S.Title>
       </S.TitleContainer>
       <S.SignupNotice>SNS 계정으로 간편 가입하기</S.SignupNotice>
+      <S.SocialLoginContainer>
+        <img src="img/kakao-login.png" alt="카카오로그인" />
+      </S.SocialLoginContainer>
+
     </S.Container>
   );
 };

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-
+import styled from 'styled-components';
 import KakaoMap from 'components/pages/map/KakaoMap';
+import SearchPoint, { StyledInput } from 'components/pages/map/SearchPoint';
 
 const Points = () => {
   return (
@@ -9,23 +10,38 @@ const Points = () => {
         position: 'relative',
       }}
     >
+
       <KakaoMap />
+      <SearchPoint />
       <Link to="/write">
-        <button
-          style={{
-            position: 'absolute',
-            bottom: 10,
-            zIndex: 9999,
-            width: 100,
-            height: 50,
-            left: 10,
-          }}
-        >
-          글쓰기
-        </button>
+        <StyledButton>
+          + 나의 로그 작성하기
+        </StyledButton>
       </Link>
     </div>
   );
 };
 
 export default Points;
+
+
+export const StyledButton = styled.button`    
+    display: flex;
+    width: 260px;
+    height: 64px;
+    padding: 18px 40px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 100px;
+    background: #FF7334;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    position: absolute;
+    left: 60px;
+    z-index: 9999;
+`;
+
