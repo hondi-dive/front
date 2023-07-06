@@ -11,15 +11,10 @@ const Main = () => {
   }, 3000);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <S.Container>
       <S.Title>이거바당</S.Title>
       {isLoading && (
-        <img
-          src="https://i.pinimg.com/originals/6e/66/fb/6e66fb78ef95b79b403db26d33fd2497.gif"
-          width={100}
-          height={100}
-          style={{ position: 'absolute', width: '100%', height: 500 }}
-        />
+        <S.LoadingImage src="https://i.pinimg.com/originals/6e/66/fb/6e66fb78ef95b79b403db26d33fd2497.gif" />
       )}
       <S.Img
         src={
@@ -27,7 +22,7 @@ const Main = () => {
         }
         alt="메인 이미지"
       />
-    </div>
+    </S.Container>
   );
 };
 
