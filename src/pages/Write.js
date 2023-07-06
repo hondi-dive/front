@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 
-import TopNav from 'components/TopNav';
 import { createPoint } from 'apis/points';
+import TopNav from 'components/TopNav';
 import Section from 'components/pages/write/Section';
 import KakaoMap from 'components/pages/map/KakaoMap';
 

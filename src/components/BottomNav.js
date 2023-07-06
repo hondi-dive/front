@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { BsPerson } from 'react-icons/bs';
 import { AiFillPlusCircle } from 'react-icons/ai';
 
-const BottomNav = ({ title, actionName, action }) => {
+const BottomNav = () => {
   const navigate = useNavigate();
 
   return (
@@ -50,7 +50,7 @@ export default BottomNav;
 export const NavbarContainer = styled.div`
   width: 100%;
   height: 70px;
-  background: rgba(255, 255, 255, 0.8); /* Adjust the alpha value (0.9) to control the transparency */
+  background: rgba(255, 255, 255, 0.8);
   box-shadow: 0px 0px 12px 3px rgba(56, 56, 56, 0.1);
   display: flex;
   justify-content: space-around;
@@ -60,14 +60,13 @@ export const NavbarContainer = styled.div`
   left: 0;
   right: 0;
   overflow: hidden;
-  max-width: 396px;
+  max-width: 393px;
   margin: 0 auto;
   z-index: 99;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   position: fixed;
 `;
-
 
 export const NavbarPosition = styled.div`
   color: #000;

@@ -1,11 +1,8 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import KakaoMap from 'components/pages/map/KakaoMap';
-import SearchPoint, { StyledInput } from 'components/pages/map/SearchPoint';
 import BottomNav from 'components/BottomNav';
+import KakaoMap from 'components/pages/map/KakaoMap';
+import SearchPoint from 'components/pages/map/SearchPoint';
 
 const Points = () => {
-
   return (
     <div
       style={{
@@ -20,5 +17,3 @@ const Points = () => {
 };
 
 export default Points;
-
-

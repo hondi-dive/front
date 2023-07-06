@@ -87,7 +87,7 @@ const FeedDetail = () => {
           bottom: 0,
           backgroundColor: 'white',
           width: '100%',
-          maxWidth: 396,
+          maxWidth: 393,
           padding: '0 24px',
         }}
       >

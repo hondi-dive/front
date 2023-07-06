@@ -36,14 +36,14 @@ const KakaoMap = ({ title, id, action }) => {
         },
         {
           id: 4,
-          title: '월평포구',
-          content: '<div>월평포구</div>',
+          title: '황우지선녀탕',
+          content: '<div>황우지선녀탕</div>',
           latlng: new kakao.maps.LatLng(33.234152, 126.463248),
         },
         {
           id: 5,
-          title: '황우지선녀탕',
-          content: '<div>황우지선녀탕</div>',
+          title: '김녕포구',
+          content: '<div>김녕포구</div>',
           latlng: new kakao.maps.LatLng(33.239479, 126.548912),
         },
         {
