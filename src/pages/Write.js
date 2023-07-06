@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 
 import TopNav from 'components/TopNav';
 import { createPoint } from 'apis/points';
+import Section from 'components/pages/write/Section';
 
 const Write = () => {
   const inputRef = useRef(null);
@@ -272,16 +273,26 @@ const Write = () => {
         }}
         value={pointId}
       />
-      <input
-        type="date"
-        name="date"
-        style={{ width: '100%' }}
-        placeholder="날짜"
-        onChange={(e) => {
-          setDate(e.target.value);
-        }}
-        value={date}
-      />
+      <Section title="날짜">
+        <input
+          type="date"
+          name="date"
+          style={{
+            width: '100%',
+            border: 'none',
+            height: 56,
+            boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+            borderRadius: 8,
+            padding: '0 8px',
+          }}
+          placeholder="날짜"
+          onChange={(e) => {
+            setDate(e.target.value);
+          }}
+          value={date}
+        />
+      </Section>
+
       <input
         name="text"
         style={{
@@ -291,259 +302,162 @@ const Write = () => {
           borderRadius: 8,
           padding: 8,
         }}
-        placeholder="텍스트 로그"
+        placeholder="후기를 작성해주십쇼"
         onChange={(e) => {
           setText(e.target.value);
         }}
         value={text}
       />
-      <input
-        name="eyesight"
-        placeholder="시야"
-        type="number"
-        style={{
-          width: '100%',
-          border: 'none',
-          boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-          borderRadius: 8,
-          padding: 8,
-        }}
-        onChange={(e) => {
-          setEyesight(e.target.value);
-        }}
-        value={eyesight}
-      />
-      <div
-        style={{
-          color: '#7F7F7F',
-          fontSize: 18,
-          fontWeight: 500,
-          lineHeight: '32px',
-        }}
-      >
-        입수형태
-      </div>
-      <div>
-        <label>
+
+      <Section title="입수형태">
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
           <input
             type="radio"
+            id="coast"
             value="coast"
             checked={water === 'coast'}
-            onChange={handleOptionChange}
+            onClick={handleOptionChange}
           />
-          비치
-        </label>
-        <label>
+          <label for="coast" style={{ padding: '8px 38px' }}>
+            해안
+          </label>
           <input
             type="radio"
+            id="boat"
             value="boat"
             checked={water === 'boat'}
-            onChange={handleOptionChange}
+            onClick={handleOptionChange}
           />
-          보트
-        </label>
-        <label>
-          <input type="radio" value="etc" checked={water === 'etc'} onChange={handleOptionChange} />
-          기타
-        </label>
-      </div>
-      <div
-        style={{
-          color: '#7F7F7F',
-          fontSize: 18,
-          fontWeight: 500,
-          lineHeight: '32px',
-        }}
-      >
-        해류 (수면)
-      </div>
-      <div>
-        <label>
+          <label for="boat" style={{ padding: '8px 38px' }}>
+            보트
+          </label>
           <input
             type="radio"
+            value="etc"
+            id="etc"
+            checked={water === 'etc'}
+            onClick={handleOptionChange}
+          />
+          <label for="etc" style={{ padding: '8px 38px' }}>
+            기타
+          </label>
+        </div>
+      </Section>
+      <Section title="수면해류">
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <input
+            type="radio"
+            id="strongCurrent"
             value="strongCurrent"
             checked={oceanCurrent === 'strongCurrent'}
-            onChange={handleOptionChange2}
+            onClick={handleOptionChange2}
           />
-          강한해류
-        </label>
-        <label>
+          <label for="strongCurrent" style={{ padding: '8px 24px' }}>
+            강한해류
+          </label>
           <input
             type="radio"
+            id="weakCurrent"
             value="weakCurrent"
             checked={oceanCurrent === 'weakCurrent'}
-            onChange={handleOptionChange2}
+            onClick={handleOptionChange2}
           />
-          약한해류
-        </label>
-        <label>
+          <label for="weakCurrent" style={{ padding: '8px 24px' }}>
+            약한해류
+          </label>
           <input
             type="radio"
             value="noAlgae"
+            id="noAlgae"
             checked={oceanCurrent === 'noAlgae'}
-            onChange={handleOptionChange2}
+            onClick={handleOptionChange2}
           />
-          해류없음
-        </label>
-      </div>
-      <div
-        style={{
-          color: '#7F7F7F',
-          fontSize: 18,
-          fontWeight: 500,
-          lineHeight: '32px',
-        }}
-      >
-        해류 (심층)
-      </div>
-      <div>
-        <label>
+          <label for="noAlgae" style={{ padding: '8px 24px' }}>
+            해류없음
+          </label>
+        </div>
+      </Section>
+      <Section title="심층해류">
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <input
             type="radio"
+            id="strong"
             value="strong"
             checked={waterSurface === 'strong'}
-            onChange={handleOptionChange3}
+            onClick={handleOptionChange3}
           />
-          강한해류
-        </label>
-        <label>
+          <label for="strong" style={{ padding: '8px 24px' }}>
+            강한해류
+          </label>
           <input
             type="radio"
+            id="weak"
             value="weak"
             checked={waterSurface === 'weak'}
-            onChange={handleOptionChange3}
+            onClick={handleOptionChange3}
           />
-          약한해류
-        </label>
-        <label>
+          <label for="weak" style={{ padding: '8px 24px' }}>
+            약한해류
+          </label>
           <input
             type="radio"
             value="tranquility"
+            id="tranquility"
             checked={waterSurface === 'tranquility'}
-            onChange={handleOptionChange3}
+            onClick={handleOptionChange3}
           />
-          해류없음
-        </label>
-      </div>
-      <div
-        style={{
-          color: '#7F7F7F',
-          fontSize: 18,
-          fontWeight: 500,
-          lineHeight: '32px',
-        }}
-      >
-        수온
-      </div>
-      <input
-        name="waterTemperature"
-        style={{
-          width: '100%',
-          border: 'none',
-          boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-          borderRadius: 8,
-          padding: 8,
-        }}
-        placeholder="수온"
-        onChange={(e) => {
-          setWaterTemperature(e.target.value);
-        }}
-        type="number"
-        value={waterTemperature}
-      />
-      <div
-        style={{
-          color: '#7F7F7F',
-          fontSize: 18,
-          fontWeight: 500,
-          lineHeight: '32px',
-        }}
-      >
-        날씨
-      </div>
-      <input
-        name="category"
-        placeholder="날씨"
-        style={{
-          width: '100%',
-          border: 'none',
-          boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-          borderRadius: 8,
-          padding: 8,
-        }}
-        onChange={(e) => {
-          setWeather(e.target.value);
-        }}
-        value={weather}
-      />
-      <div
-        style={{
-          color: '#7F7F7F',
-          fontSize: 18,
-          fontWeight: 500,
-          lineHeight: '32px',
-        }}
-      >
-        기온
-      </div>
-      <input
-        name="temperature"
-        style={{
-          width: '100%',
-          border: 'none',
-          boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-          borderRadius: 8,
-          padding: 8,
-        }}
-        placeholder="기온"
-        type="number"
-        onChange={(e) => {
-          setTemperature(e.target.value);
-        }}
-        value={temperature}
-      />
-      <div
-        style={{
-          color: '#7F7F7F',
-          fontSize: 18,
-          fontWeight: 500,
-          lineHeight: '32px',
-        }}
-      >
-        다이빙 시간
-      </div>
-      <input
-        name="diveTime"
-        placeholder="다이빙 시간"
-        style={{
-          width: '100%',
-          border: 'none',
-          boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-          borderRadius: 8,
-          padding: 8,
-        }}
-        onChange={(e) => {
-          setDiveTime(e.target.value);
-        }}
-        value={diveTime}
-      />
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
-        <div>
-          <div
+          <label for="tranquility" style={{ padding: '8px 24px' }}>
+            해류없음
+          </label>
+        </div>
+      </Section>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Section title="수온">
+          <input
+            name="waterTemperature"
             style={{
-              color: '#7F7F7F',
-              fontSize: 18,
-              fontWeight: 500,
-              lineHeight: '32px',
+              width: '100%',
+              border: 'none',
+              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+              borderRadius: 8,
+              padding: 8,
+              height: 56,
             }}
-          >
-            입수전 잔량
-          </div>
+            placeholder="수온"
+            onChange={(e) => {
+              setWaterTemperature(e.target.value);
+            }}
+            type="number"
+            value={waterTemperature}
+          />
+        </Section>
+        <Section title="기온">
+          <input
+            name="temperature"
+            style={{
+              width: '100%',
+              border: 'none',
+              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+              borderRadius: 8,
+              padding: 8,
+              height: 56,
+            }}
+            placeholder="기온"
+            type="number"
+            onChange={(e) => {
+              setTemperature(e.target.value);
+            }}
+            value={temperature}
+          />
+        </Section>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Section title="입수전 잔량">
           <input
             name="beforeIntake"
             placeholder="입수전 잔량"
@@ -560,18 +474,8 @@ const Write = () => {
             }}
             value={beforeIntake}
           />
-        </div>
-        <div>
-          <div
-            style={{
-              color: '#7F7F7F',
-              fontSize: 18,
-              fontWeight: 500,
-              lineHeight: '32px',
-            }}
-          >
-            입수후 잔량
-          </div>
+        </Section>
+        <Section title="입수후 잔량">
           <input
             name="afterIntake"
             style={{
@@ -588,26 +492,10 @@ const Write = () => {
             }}
             value={afterIntake}
           />
-        </div>
+        </Section>
       </div>
-
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
-        <div>
-          <div
-            style={{
-              color: '#7F7F7F',
-              fontSize: 18,
-              fontWeight: 500,
-              lineHeight: '32px',
-            }}
-          >
-            다이브 최고수심
-          </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Section title="다이브 최고수심">
           <input
             name="highestDepth"
             placeholder="다이브 최고수심"
@@ -624,18 +512,8 @@ const Write = () => {
             }}
             value={highestDepth}
           />
-        </div>
-        <div>
-          <div
-            style={{
-              color: '#7F7F7F',
-              fontSize: 18,
-              fontWeight: 500,
-              lineHeight: '32px',
-            }}
-          >
-            포인트 수심
-          </div>
+        </Section>
+        <Section title="포인트 수심">
           <input
             name="pointDepth"
             style={{
@@ -652,34 +530,65 @@ const Write = () => {
             }}
             value={pointDepth}
           />
-        </div>
+        </Section>
       </div>
-      <div
-        style={{
-          color: '#7F7F7F',
-          fontSize: 18,
-          fontWeight: 500,
-          lineHeight: '32px',
-        }}
-      >
-        감압 다이빙
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Section title="다이빙 시간">
+          <input
+            name="diveTime"
+            placeholder="다이빙 시간"
+            style={{
+              width: '100%',
+              border: 'none',
+              height: 56,
+              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+              borderRadius: 8,
+              padding: 8,
+            }}
+            onChange={(e) => {
+              setDiveTime(e.target.value);
+            }}
+            value={diveTime}
+          />
+        </Section>
+        <Section title="감압 여부">
+          <div
+            style={{
+              width: '164px',
+              border: 'none',
+              height: 56,
+              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+              borderRadius: 8,
+            }}
+            placeholder="감압 다이빙"
+            onClick={(e) => {
+              setDecompression(!decompression);
+            }}
+            value={decompression}
+          >
+            {decompression ? '했음' : '안함'}
+          </div>
+        </Section>
       </div>
-      <div
-        style={{
-          width: '164px',
-          border: 'none',
-          height: 56,
-          boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-          borderRadius: 8,
-        }}
-        placeholder="감압 다이빙"
-        onClick={(e) => {
-          setDecompression(!decompression);
-        }}
-        value={decompression}
-      >
-        {decompression ? '했음' : '안함'}
-      </div>
+      <Section title="시야">
+        <input
+          name="eyesight"
+          placeholder="시야"
+          type="number"
+          style={{
+            width: '100%',
+            border: 'none',
+            height: 56,
+            boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+            borderRadius: 8,
+            padding: 8,
+          }}
+          onChange={(e) => {
+            setEyesight(e.target.value);
+          }}
+          value={eyesight}
+        />
+      </Section>
     </div>
   );
 };
