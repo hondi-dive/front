@@ -1,14 +1,14 @@
 import Routes from 'routes';
 import GlobalStyle from 'styles/reset';
+import Layout from 'pages/Layout';
 import DefaultLayout from 'layouts/DefaultLayout';
-import KakaoMap from 'pages/KakaoMap';
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
+      <Layout router={<Routes />} />
       <DefaultLayout router={<Routes />} />
-      <KakaoMap />
     </>
   );
 };
