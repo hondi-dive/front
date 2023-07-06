@@ -27,9 +27,33 @@ const KakaoMap = () => {
             latlng: new kakao.maps.LatLng(33.218354, 126.516717)
         },
         {
+          content: '<div>월평포구</div>', 
+          latlng: new kakao.maps.LatLng(33.234152, 126.463248)
+      },
+      {
+          content: '<div>황우지선녀탕</div>', 
+          latlng: new kakao.maps.LatLng(33.239479, 126.548912)
+      },
+      {
+          content: '<div>김녕해변</div>', 
+          latlng: new kakao.maps.LatLng( 33.557752, 126.758989)
+      },
+        {
             content: '<div>중문해수욕장</div>',
-            latlng: new kakao.maps.LatLng(33.244914, 126.411545)
-        }
+            latlng: new kakao.maps.LatLng(33.243064, 126.412131)
+        },
+        {
+          content: '<div>함덕해변</div>', 
+          latlng: new kakao.maps.LatLng(333.543495, 126.669673)
+      },
+      {
+          content: '<div>이호테우해변</div>', 
+          latlng: new kakao.maps.LatLng(33.498197, 126.452930)
+      },
+      {
+          content: '<div>협재해변</div>', 
+          latlng: new kakao.maps.LatLng(33.394390, 126.239582)
+      }
     ];
 
     for (let i = 0; i < positions.length; i ++) {

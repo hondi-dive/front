@@ -53,11 +53,7 @@ const Feed = () => {
     <>
       <TopNav
         title="광치기 해변"
-        actionName=""
-        // action={() => {
-        //    onFinish();
-        //  }}
-        />
+        actionName=""/>
     
     <S.Container>
       <S.Tag>
