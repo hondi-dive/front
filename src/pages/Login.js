@@ -25,7 +25,7 @@ const Login = () => {
       </S.SubDescription>
       <S.SubImgContainer>
         <img src="img/second-img.png" alt="메인이미지" width="100%" />
-        <S.SocialLoginDescription>SNS 계정으로 간편 가입하기</S.SocialLoginDescription>
+        <S.SocialLoginDescription>간편 로그인하기</S.SocialLoginDescription>
         <S.SocialLoginContainer>
           <div className=" relative p-1.5 shadow-lg">
             <input
@@ -39,7 +39,7 @@ const Login = () => {
                 setCookie('accessToken', userId, { path: '/', maxAge: 9999999999999 });
                 navigate(staticServerUri + '/points');
               }}
-              className="absolute right-[1px] top-[11px] cursor-pointer bg-[#327aeb] py-3 text-white px-3"
+              className="absolute right-[-50px] top-[6px] cursor-pointer bg-[#327aeb] py-3 text-white px-3"
             >
               제출
             </div>

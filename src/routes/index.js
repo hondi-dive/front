@@ -7,6 +7,7 @@ import Feed from 'pages/Feed';
 import FeedDetail from 'pages/FeedDetail';
 import Write from 'pages/Write';
 import Log from 'pages/Log';
+import Mypage from 'pages/Mypage';
 
 const staticServerUri = process.env.REACT_APP_PATH || '';
 
@@ -20,6 +21,7 @@ const RoutesContainer = () => {
       <Route path={staticServerUri + '/feed/:id'} element={<FeedDetail />} />
       <Route path={staticServerUri + '/logs/:id'} element={<Log />} />
       <Route path={staticServerUri + '/write'} element={<Write />} />
+      <Route path={staticServerUri + '/mypage'} element={<Mypage/>} />
     </Routes>
   );
 };
