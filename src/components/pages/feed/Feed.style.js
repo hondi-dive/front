@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   position: relative;
-  padding-top: 20px;
+  padding-top: 80px;
   `;
 
 export const Tag = styled.div`

@@ -1,9 +1,17 @@
 import styled from 'styled-components'
 import { MdNavigateBefore,MdNavigateNext } from "react-icons/md";
+import TopNav from 'components/TopNav';
 
 const Navbar = () => {
     return (
         <div>
+            <TopNav
+                title="나의 로그 작성하기"
+                actionName="저장"
+                action={() => {
+                onFinish();
+                }}
+            />
             <NavbarContainer>
                 <MdNavigateBefore className="icon" size="30" color="black"  />
                 <NavbarPosition>광치기 해변</NavbarPosition>  

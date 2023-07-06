@@ -97,9 +97,9 @@ const Write = () => {
   };
   return (
     <div
-      style={{
-        padding: '64px 24px 0 24px',
-      }}
+      // style={{
+      //   padding: '0px 24px 0 24px',
+      // }}
     >
       <TopNav
         title="나의 로그 작성하기"
@@ -115,6 +115,7 @@ const Write = () => {
           fontWeight: 600,
           marginBottom: 40,
           marginTop: 40,
+          paddingTop: 40,
         }}
       >
         나의 물질을 자랑해줍서

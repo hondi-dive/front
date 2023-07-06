@@ -1,7 +1,7 @@
 import * as S from 'components/pages/feed/Feed.style';
 ;import { HiLocationMarker } from "react-icons/hi";
 import { Link } from 'react-router-dom';
-import Navbar from 'components/navbar/Navbar'
+import TopNav from 'components/TopNav';
 import GridLayout from "react-grid-layout";
 import styled from "styled-components";
 
@@ -51,7 +51,14 @@ const Feed = () => {
 
   return (
     <>
-    <Navbar/>
+      <TopNav
+        title="광치기 해변"
+        actionName=""
+        // action={() => {
+        //    onFinish();
+        //  }}
+        />
+    
     <S.Container>
       <S.Tag>
         <S.Icon>
