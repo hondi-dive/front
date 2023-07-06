@@ -2,7 +2,7 @@ export const shareKakao = () => {
   if (window.Kakao) {
     const kakao = window.Kakao;
     if (!kakao.isInitialized()) {
-      kakao.init('40037cf54b8a13e65ccb4b9cdecd677f');
+      kakao.init('ab36d4875e21306d46e1b31492854ba7');
     }
 
     kakao.Link.sendDefault({
