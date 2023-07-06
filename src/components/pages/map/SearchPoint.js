@@ -38,7 +38,7 @@ export const SearchContainer = styled.div`
   background-color: white;
   border-radius: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 `;
 
