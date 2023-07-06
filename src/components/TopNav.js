@@ -51,6 +51,7 @@ export const NavbarContainer = styled.div`
   overflow: hidden;
   max-width: 393px;
   margin: 0 auto;
+  z-index: 99;
 `;
 
 export const NavbarPosition = styled.div`
