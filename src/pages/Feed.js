@@ -1,5 +1,4 @@
 import * as S from 'components/pages/feed/Feed.style';
-
 const Feed = () => {
   const images = [
     {
@@ -37,3 +36,4 @@ const Feed = () => {
 };
 
 export default Feed;
+
