@@ -5,7 +5,7 @@ import KakaoMap from 'pages/KakaoMap';
 import Feed from 'pages/Feed';
 import FeedDetail from 'pages/FeedDetail';
 
-const Routes2 = () => {
+const RoutesContainer = () => {
   return (
     <Routes>
       <Route path="/" element={<Main />} />
@@ -16,4 +16,4 @@ const Routes2 = () => {
   );
 };
 
-export default Routes2;
+export default RoutesContainer;
