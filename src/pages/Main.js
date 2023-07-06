@@ -19,7 +19,7 @@ const Main = () => {
       } else {
         navigate(staticServerUri + '/login');
       }
-    }, 1000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [navigate]);
