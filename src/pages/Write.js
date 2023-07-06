@@ -8,24 +8,23 @@ const Write = () => {
   const inputRef = useRef(null);
 
   const [imgFile, setImgFile] = useState();
-  const [category, setCategory] = useState('scuba');
+  const [category, setCategory] = useState('SCUBA');
   const [pointId, setPointId] = useState();
   const [date, setDate] = useState();
   const [star, setStar] = useState([true, true, true, true, false, false]);
   const [text, setText] = useState();
   const [eyesight, setEyesight] = useState();
-  const [water, setWater] = useState();
-  const [oceanCurrent, setOceanCurrent] = useState();
-  const [waterSurface, setWaterSurface] = useState();
-  const [weather, setWeather] = useState();
-  const [waterTemperature, setWaterTemperature] = useState();
-  const [temperature, setTemperature] = useState();
+  const [diveEntry, setDiveEntry] = useState();
+  const [surfaceFlow, setSurfaceFlow] = useState();
+  const [deepFlow, setDeepFlow] = useState();
+  const [waterTemp, setWaterTemp] = useState();
+  const [temp, setTemp] = useState();
   const [diveTime, setDiveTime] = useState();
   const [beforeIntake, setBeforeIntake] = useState();
   const [afterIntake, setAfterIntake] = useState();
-  const [highestDepth, setHighestDepth] = useState();
+  const [maxDepth, setMaxDepth] = useState();
   const [pointDepth, setPointDepth] = useState();
-  const [decompression, setDecompression] = useState(false);
+  const [decompression, setDecompression] = useState();
 
   const onUploadImage = async (e) => {
     if (!e.target.files) {
@@ -52,34 +51,35 @@ const Write = () => {
       star: Number(star.filter((el) => el).length - 1),
       text,
       eyesight: Number(eyesight),
-      water,
-      oceanCurrent,
-      waterSurface,
-      waterTemperature: Number(waterTemperature),
-      temperature: Number(temperature),
+      diveEntry,
+      surfaceFlow,
+      deepFlow,
+      waterTemp: Number(waterTemp),
+      temp: Number(temp),
       diveTime: Number(diveTime),
       beforeIntake: Number(beforeIntake),
       afterIntake: Number(afterIntake),
-      highestDepth: Number(highestDepth),
+      maxDepth: Number(maxDepth),
       pointDepth: Number(pointDepth),
       decompression,
     };
-
+    console.log(value);
     formData.append('contents', new Blob([JSON.stringify(value)], { type: 'application/json' }));
 
     const res = await createPoint(formData);
   };
 
   const handleOptionChange = (event) => {
-    setWater(event.target.value);
+    setDiveEntry(event.target.value);
   };
 
   const handleOptionChange2 = (event) => {
-    setOceanCurrent(event.target.value);
+    setSurfaceFlow(event.target.value);
   };
 
   const handleOptionChange3 = (event) => {
-    setWaterSurface(event.target.value);
+    console.log(event);
+    setDeepFlow(event.target.value);
   };
 
   const handleStarClick = (index) => {
@@ -203,6 +203,7 @@ const Write = () => {
         style={{
           boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
           borderRadius: 8,
+          overflow: 'hidden',
           color: '#7F7F7F',
           width: '100%',
           height: 352,
@@ -334,32 +335,32 @@ const Write = () => {
         >
           <input
             type="radio"
-            id="coast"
-            value="coast"
-            checked={water === 'coast'}
+            id="BEATCH"
+            value="BEATCH"
+            checked={diveEntry === 'BEATCH'}
             onClick={handleOptionChange}
           />
-          <label for="coast" style={{ padding: '8px 38px' }}>
+          <label for="BEATCH" style={{ padding: '8px 38px' }}>
             해안
           </label>
           <input
             type="radio"
-            id="boat"
-            value="boat"
-            checked={water === 'boat'}
+            id="BOAT"
+            value="BOAT"
+            checked={diveEntry === 'BOAT'}
             onClick={handleOptionChange}
           />
-          <label for="boat" style={{ padding: '8px 38px' }}>
+          <label for="BOAT" style={{ padding: '8px 38px' }}>
             보트
           </label>
           <input
             type="radio"
-            value="etc"
-            id="etc"
-            checked={water === 'etc'}
+            value="ETC"
+            id="ETC"
+            checked={diveEntry === 'ETC'}
             onClick={handleOptionChange}
           />
-          <label for="etc" style={{ padding: '8px 38px' }}>
+          <label for="ETC" style={{ padding: '8px 38px' }}>
             기타
           </label>
         </div>
@@ -368,33 +369,33 @@ const Write = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <input
             type="radio"
-            id="strongCurrent"
-            value="strongCurrent"
-            checked={oceanCurrent === 'strongCurrent'}
+            id="STRONG"
+            value="STRONG"
+            checked={surfaceFlow === 'STRONG'}
             onClick={handleOptionChange2}
           />
-          <label for="strongCurrent" style={{ padding: '8px 24px' }}>
+          <label for="STRONG" style={{ padding: '8px 24px' }}>
             강한해류
           </label>
           <input
             type="radio"
-            id="weakCurrent"
-            value="weakCurrent"
-            checked={oceanCurrent === 'weakCurrent'}
+            value="MIDDLE"
+            id="MIDDLE"
+            checked={surfaceFlow === 'MIDDLE'}
             onClick={handleOptionChange2}
           />
-          <label for="weakCurrent" style={{ padding: '8px 24px' }}>
-            약한해류
+          <label for="MIDDLE" style={{ padding: '8px 24px' }}>
+            보통해류
           </label>
           <input
             type="radio"
-            value="noAlgae"
-            id="noAlgae"
-            checked={oceanCurrent === 'noAlgae'}
+            id="WEEK"
+            value="WEEK"
+            checked={surfaceFlow === 'WEEK'}
             onClick={handleOptionChange2}
           />
-          <label for="noAlgae" style={{ padding: '8px 24px' }}>
-            해류없음
+          <label for="WEEK" style={{ padding: '8px 24px' }}>
+            약한해류
           </label>
         </div>
       </Section>
@@ -402,33 +403,33 @@ const Write = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <input
             type="radio"
-            id="strong"
-            value="strong"
-            checked={waterSurface === 'strong'}
+            id="STRONG2"
+            value="STRONG"
+            checked={deepFlow === 'STRONG'}
             onClick={handleOptionChange3}
           />
-          <label for="strong" style={{ padding: '8px 24px' }}>
+          <label for="STRONG2" style={{ padding: '8px 24px' }}>
             강한해류
           </label>
           <input
             type="radio"
-            id="weak"
-            value="weak"
-            checked={waterSurface === 'weak'}
+            id="MIDDLE2"
+            value="MIDDLE"
+            checked={deepFlow === 'MIDDLE'}
             onClick={handleOptionChange3}
           />
-          <label for="weak" style={{ padding: '8px 24px' }}>
-            약한해류
+          <label for="MIDDLE2" style={{ padding: '8px 24px' }}>
+            보통해류
           </label>
           <input
             type="radio"
-            value="tranquility"
-            id="tranquility"
-            checked={waterSurface === 'tranquility'}
+            value="WEEK"
+            id="WEEK2"
+            checked={deepFlow === 'WEEK'}
             onClick={handleOptionChange3}
           />
-          <label for="tranquility" style={{ padding: '8px 24px' }}>
-            해류없음
+          <label for="WEEK2" style={{ padding: '8px 24px' }}>
+            약한해류
           </label>
         </div>
       </Section>
@@ -446,14 +447,14 @@ const Write = () => {
             }}
           >
             <input
-              name="waterTemperature"
+              name="waterTemp"
               style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
               placeholder="수온"
               onChange={(e) => {
-                setWaterTemperature(e.target.value);
+                setWaterTemp(e.target.value);
               }}
               type="number"
-              value={waterTemperature}
+              value={waterTemp}
             />
             <div
               style={{
@@ -479,14 +480,14 @@ const Write = () => {
             }}
           >
             <input
-              name="temperature"
+              name="temp"
               style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
               placeholder="기온"
               type="number"
               onChange={(e) => {
-                setTemperature(e.target.value);
+                setTemp(e.target.value);
               }}
-              value={temperature}
+              value={temp}
             />
             <div
               style={{
@@ -582,14 +583,14 @@ const Write = () => {
             }}
           >
             <input
-              name="highestDepth"
+              name="maxDepth"
               style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
               placeholder="다이브 최고수심"
               type="number"
               onChange={(e) => {
-                setHighestDepth(e.target.value);
+                setMaxDepth(e.target.value);
               }}
-              value={highestDepth}
+              value={maxDepth}
             />
             <div
               style={{
@@ -638,24 +639,6 @@ const Write = () => {
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Section title="다이빙 시간">
-          <input
-            name="diveTime"
-            placeholder="다이빙 시간"
-            style={{
-              width: '100%',
-              border: 'none',
-              height: 56,
-              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              borderRadius: 8,
-              padding: 8,
-            }}
-            onChange={(e) => {
-              setDiveTime(e.target.value);
-            }}
-            value={diveTime}
-          />
-        </Section>
-        <Section title="감압 여부">
           <div
             style={{
               width: '164px',
@@ -663,14 +646,60 @@ const Write = () => {
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
+              position: 'relative',
+              padding: 12,
             }}
-            placeholder="감압 다이빙"
-            onClick={(e) => {
-              setDecompression(!decompression);
-            }}
-            value={decompression}
           >
-            {decompression ? '했음' : '안함'}
+            <input
+              name="diveTime"
+              placeholder="다이빙 시간"
+              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+              onChange={(e) => {
+                setDiveTime(e.target.value);
+              }}
+              value={diveTime}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: 21,
+              }}
+            >
+              분
+            </div>
+          </div>
+        </Section>
+        <Section title="감압 시간">
+          <div
+            style={{
+              width: '164px',
+              border: 'none',
+              height: 56,
+              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+              borderRadius: 8,
+              position: 'relative',
+              padding: 12,
+            }}
+          >
+            <input
+              name="decompression"
+              placeholder="감압 시간"
+              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+              onChange={(e) => {
+                setDecompression(e.target.value);
+              }}
+              value={decompression}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: 21,
+              }}
+            >
+              분
+            </div>
           </div>
         </Section>
       </div>
