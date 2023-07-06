@@ -23,6 +23,8 @@ const Log = () => {
     return <div />;
   }
 
+  console.log(detail);
+
   return (
     <div
       style={{
@@ -64,93 +66,99 @@ const Log = () => {
           {detail.date.slice(0, 10)}
         </div>
       </Section>
-      <Section title="입수형태">
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-          className=" space-x-3"
-        >
-          {[
-            { title: '해안', value: 'BEATCH' },
-            { title: '보트', value: 'BOAT' },
-            { title: '기타', value: 'ETC' },
-          ].map((item) => (
-            <div
-              style={{
-                padding: '12px 0',
-                backgroundColor: item.value === detail.diveEntry ? '#8FB4FE' : 'white',
-                width: '106px',
-                textAlign: 'center',
-                color: item.value === detail.diveEntry ? 'white' : '#7F7F7F',
-                borderRadius: 8,
-                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              }}
-            >
-              {item.title}
-            </div>
-          ))}
-        </div>
-      </Section>
-      <Section title="수면해류">
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-          className=" space-x-3"
-        >
-          {[
-            { title: '강한해류', value: 'STRONG' },
-            { title: '보통해류', value: 'MIDDLE' },
-            { title: '약한해류', value: 'WEEK' },
-          ].map((item) => (
-            <div
-              style={{
-                padding: '12px 0',
-                backgroundColor: item.value === detail.surfaceFlow ? '#8FB4FE' : 'white',
-                width: '106px',
-                textAlign: 'center',
-                color: item.value === detail.surfaceFlow ? 'white' : '#7F7F7F',
-                borderRadius: 8,
-                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              }}
-            >
-              {item.title}
-            </div>
-          ))}
-        </div>
-      </Section>
-      <Section title="심층해류">
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-          className=" space-x-3"
-        >
-          {[
-            { title: '강한해류', value: 'STRONG' },
-            { title: '보통해류', value: 'MIDDLE' },
-            { title: '약한해류', value: 'WEEK' },
-          ].map((item) => (
-            <div
-              style={{
-                padding: '12px 0',
-                backgroundColor: item.value === detail.deepFlow ? '#8FB4FE' : 'white',
-                width: '106px',
-                textAlign: 'center',
-                color: item.value === detail.deepFlow ? 'white' : '#7F7F7F',
-                borderRadius: 8,
-                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              }}
-            >
-              {item.title}
-            </div>
-          ))}
-        </div>
-      </Section>
+      {detail.diveEntry && (
+        <Section title="입수형태">
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+            className=" space-x-3"
+          >
+            {[
+              { title: '해안', value: 'BEATCH' },
+              { title: '보트', value: 'BOAT' },
+              { title: '기타', value: 'ETC' },
+            ].map((item) => (
+              <div
+                style={{
+                  padding: '12px 0',
+                  backgroundColor: item.value === detail.diveEntry ? '#8FB4FE' : 'white',
+                  width: '106px',
+                  textAlign: 'center',
+                  color: item.value === detail.diveEntry ? 'white' : '#7F7F7F',
+                  borderRadius: 8,
+                  boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                }}
+              >
+                {item.title}
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+      {detail.surfaceFlow && (
+        <Section title="수면해류">
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+            className=" space-x-3"
+          >
+            {[
+              { title: '강한해류', value: 'STRONG' },
+              { title: '보통해류', value: 'MIDDLE' },
+              { title: '약한해류', value: 'WEEK' },
+            ].map((item) => (
+              <div
+                style={{
+                  padding: '12px 0',
+                  backgroundColor: item.value === detail.surfaceFlow ? '#8FB4FE' : 'white',
+                  width: '106px',
+                  textAlign: 'center',
+                  color: item.value === detail.surfaceFlow ? 'white' : '#7F7F7F',
+                  borderRadius: 8,
+                  boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                }}
+              >
+                {item.title}
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+      {detail.deepFlow && (
+        <Section title="심층해류">
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+            className=" space-x-3"
+          >
+            {[
+              { title: '강한해류', value: 'STRONG' },
+              { title: '보통해류', value: 'MIDDLE' },
+              { title: '약한해류', value: 'WEEK' },
+            ].map((item) => (
+              <div
+                style={{
+                  padding: '12px 0',
+                  backgroundColor: item.value === detail.deepFlow ? '#8FB4FE' : 'white',
+                  width: '106px',
+                  textAlign: 'center',
+                  color: item.value === detail.deepFlow ? 'white' : '#7F7F7F',
+                  borderRadius: 8,
+                  boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                }}
+              >
+                {item.title}
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
       {detail.waterTemp && (
         <div
           style={{
