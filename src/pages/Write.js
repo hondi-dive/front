@@ -4,7 +4,7 @@ import { createPoint } from 'apis/points';
 const Write = () => {
   const [imgFile, setImgFile] = useState();
   const [category, setCategory] = useState('scuba');
-  const [point, setPoint] = useState();
+  const [pointId, setPointId] = useState();
   const [date, setDate] = useState();
   const [star, setStar] = useState();
   const [text, setText] = useState();
@@ -27,7 +27,7 @@ const Write = () => {
       return;
     }
     const file = e.target.files[0];
-    console.log(file);
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
@@ -38,34 +38,31 @@ const Write = () => {
   const onFinish = async () => {
     const formData = new FormData();
 
-    formData.append('imgFile', imgFile);
+    formData.append('imgFile', new Blob([imgFile], { type: 'image/png' }));
 
-    const value = [
-      {
-        category,
-        point,
-        date,
-        star,
-        text,
-        eyesight,
-        water,
-        oceanCurrent,
-        waterSurface,
-        waterTemperature,
-        temperature,
-        diveTime,
-        beforeIntake,
-        afterIntake,
-        highestDepth,
-        pointDepth,
-        decompression,
-      },
-    ];
+    const value = {
+      category,
+      pointId: Number(pointId),
+      date: new Date(date),
+      star: Number(star),
+      text,
+      eyesight: Number(eyesight),
+      water,
+      oceanCurrent,
+      waterSurface,
+      waterTemperature: Number(waterTemperature),
+      temperature: Number(temperature),
+      diveTime: Number(diveTime),
+      beforeIntake: Number(beforeIntake),
+      afterIntake: Number(afterIntake),
+      highestDepth: Number(highestDepth),
+      pointDepth: Number(pointDepth),
+      decompression,
+    };
 
     formData.append('contents', new Blob([JSON.stringify(value)], { type: 'application/json' }));
-    console.log(value);
+
     const res = await createPoint(formData);
-    console.log(res);
   };
 
   return (
@@ -82,13 +79,13 @@ const Write = () => {
         value={category}
       />
       <input
-        name="point"
+        name="pointId"
         placeholder="포인트"
         style={{ width: '100%' }}
         onChange={(e) => {
-          setPoint(e.target.value);
+          setPointId(e.target.value);
         }}
-        value={point}
+        value={pointId}
       />
       <input
         type="date"
@@ -167,7 +164,7 @@ const Write = () => {
         onChange={(e) => {
           setWeather(e.target.value);
         }}
-        value={category}
+        value={weather}
       />
       <input
         name="waterTemperature"
@@ -177,7 +174,7 @@ const Write = () => {
           setWaterTemperature(e.target.value);
         }}
         type="number"
-        value={weather}
+        value={waterTemperature}
       />
       <input
         name="temperature"
