@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import "apis/fonts/font.css";
 
 export const Container = styled.div`
   position: relative;
@@ -14,6 +14,7 @@ border-radius: 16px;
 background: #327AEB;
 display: flex;
 justify-content: space-evenly;
+padding-right: 10px;
 margin-left: 24px;
 `;
 
@@ -27,7 +28,7 @@ export const Location = styled.div`
 color: #FFF;
 font-size: 28px;
 text-transform: uppercase;
-font-family: SlowSlow, sans-serif, Arial;
+font-family: SlowSlow;
 text-align: center;
 line-height: 50px;
 `;
@@ -52,8 +53,9 @@ border-radius: 8px;
 background: #FFF;
 box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 display: flex;
-justify-content: space-around;
+justify-content: center;
 margin: 0 auto;
+align-items: center;
 margin-top: 20px;
 `;
 
@@ -92,4 +94,40 @@ export const Image = styled.img`
 
 `;
 
+export const Wrap = styled.div`
+display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 510px;
+  align-content: center;
+  padding: 10px;
+  
+  `;
 
+export const Base = styled.img`
+  flex: 0 0 150px;
+  width: 150px;
+  color: #fff;
+  padding: 3px;
+  margin: 3px;
+  border-radius: 12px;
+  // border: 1px solid #D9D9D9;
+  `;
+
+  export const Short = styled.img`
+  flex-basis: 100px;
+  padding: 3px;
+  margin: 3px;
+  border-radius: 12px;
+  // border: 1px solid #D9D9D9;
+  width: 150px;
+  `;
+
+  export const Long = styled.img`
+  flex-basis: 200px;
+  padding: 3px;
+  margin: 3px;
+  border-radius: 12px;
+  // border: 1px solid #D9D9D9;
+  width: 150px;
+  `;

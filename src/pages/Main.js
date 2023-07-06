@@ -1,29 +1,35 @@
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as S from 'components/pages/main/Main.style';
-import useTimeout from 'hooks/useTimeout';
 
 const Main = () => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      navigate('/login');
+    }, 1000);
 
-  useTimeout(() => {
-    setIsLoading(false);
-  }, 3000);
+    return () => clearTimeout(timer);
+  }, [navigate]);
 
   return (
-    <S.Container>
+    <S.MainContainer style={{ animationPlayState: isLoading ? 'running' : 'paused' }}>
       <S.TitleContainer>
-        <S.SubTitle>바다정보 공유 서비스</S.SubTitle>
-        <S.Title>이거바당</S.Title>
+        <img src="img/white-logo.png" alt="로고" width="230" />
       </S.TitleContainer>
-      <S.SignupNotice>SNS 계정으로 간편 가입하기</S.SignupNotice>
-      <S.SocialLoginContainer>
-        <img src="img/kakao-login.png" alt="카카오로그인" />
-      </S.SocialLoginContainer>
-
-    </S.Container>
+      <S.MainTitle>水눌음(물 수 + 수눌음) 서비스</S.MainTitle>
+      <S.MainDescription>
+        제주도에서 물놀이 명당과 경험을<br/>
+        서로 공유하는 서비스입니다.
+      </S.MainDescription>
+      <S.MainImgContainer>
+        <img src="img/main-img.png" alt="메인이미지" width="100%" />
+      </S.MainImgContainer>
+    </S.MainContainer>
   );
 };
 
 export default Main;
-

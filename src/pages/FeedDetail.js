@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const FeedDetail = () => {
   return (
     <Container>
-      <TopNav title="광치기 해변" />
+      <TopNav title="월평포구" />
       <FeedContainer>
         <FeedProfile>
           <FeedProfileImage src="https://cdn.pixabay.com/photo/2017/10/24/21/49/playing-cards-2886284_1280.png" />

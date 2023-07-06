@@ -11,6 +11,7 @@ const SearchPoint = ({onClick}) => {
   };
 
     return (
+      <SearchMainContainer>
       <SearchContainer>
         <SearchBar>
           <StyledButton>
@@ -32,6 +33,7 @@ const SearchPoint = ({onClick}) => {
           />
       </SearchBar>
     </SearchContainer>
+    </SearchMainContainer>
   )
 }
 
@@ -40,10 +42,10 @@ export default SearchPoint;
 export const SearchContainer = styled.div`
   position: absolute;
   top: 30px;
-  left: 60px;
+  // left: 60px;
   z-index: 9999;
-  width: 300px;
-  height: 50px;
+  width: 320px;
+  height: 45px;
   background-color: white;
   border-radius: 10px;
   display: flex;
@@ -84,4 +86,12 @@ const StyledButton = styled.button`
   justify-content: flex-start;
   text-align: start;
   cursor: pointer;
+`;
+
+export const SearchMainContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0 auto;
+  text-align: center;
 `;
