@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import {IoSearch} from 'react-icons/io5';
 
 const SearchPoint = ({onClick}) => {
 
@@ -12,13 +13,21 @@ const SearchPoint = ({onClick}) => {
     return (
       <SearchContainer>
         <SearchBar>
-          <StyledButton className="SearchButton" onClick={onClick}>
-            <img src="img/search-btn.png" alt="search" />
+          <StyledButton>
+            <IoSearch
+              className="icon"
+              size="23"
+              color="#327AEB"
+              cursor="pointer"
+              
+            />
           </StyledButton>
           <StyledInput
             className="SearchInput"
             type="text"
             value={search}
+            placeholder='장소 검색하기'
+            padding-left='10px'
             onChange={handleInputChange}
           />
       </SearchBar>
@@ -38,14 +47,15 @@ export const SearchContainer = styled.div`
   background-color: white;
   border-radius: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding-left: 20px;
   align-items: center;
 `;
 
 export const SearchBar = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  align-items: space-around;
 `;
 
 export const StyledInput = styled.input`
