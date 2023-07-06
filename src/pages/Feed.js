@@ -43,13 +43,13 @@ const Feed = () => {
   }
 
   const dsa = (data) => {
-    if (data === 'SNORKEL') {
+    if (data === 'SCUBA') {
       return '/img/bottle.svg';
     }
     if (data === 'FREEDIVING') {
       return '/img/bottle2.svg';
     }
-    if (data === 'SCUBA') {
+    if (data === 'SNORKEL') {
       return '/img/bottle3.svg';
     }
   };
