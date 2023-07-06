@@ -1,14 +1,31 @@
-import TopNav from 'components/TopNav';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
+
+import TopNav from 'components/TopNav';
+import { shareKakao } from 'utils/shareKakao';
 
 const FeedDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://developers.kakao.com/sdk/js/kakao.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
+
   return (
     <Container>
-      <TopNav title="광치기 해변" />
+      <TopNav
+        title="광치기 해변"
+        actionName="공유하기"
+        action={() => {
+          shareKakao();
+        }}
+      />
       <FeedContainer>
         <FeedProfile>
           <FeedProfileImage src="https://cdn.pixabay.com/photo/2017/10/24/21/49/playing-cards-2886284_1280.png" />
@@ -84,7 +101,7 @@ const FeedDetail = () => {
             marginBottom: 24,
           }}
           onClick={() => {
-            navigate('/logs/id');
+            navigate(`/logs/${id}`);
           }}
         >
           로그기록 보러가기
