@@ -65,7 +65,7 @@ const Write = () => {
 
     const value = {
       category,
-      pointId: Number(pointId),
+      pointId: Number(pointId.id),
       date: new Date(date),
       star: Number(star.filter((el) => el).length - 1),
       text,
@@ -82,7 +82,7 @@ const Write = () => {
       pointDepth: Number(pointDepth),
       decompression,
     };
-
+    console.log(value);
     formData.append('contents', new Blob([JSON.stringify(value)], { type: 'application/json' }));
 
     const res = await createPoint(formData);
@@ -181,7 +181,7 @@ const Write = () => {
               marginRight: 10,
             }}
           />
-          <span>장소 등록</span>
+          <span>{pointId ? pointId.title : '장소 등록'}</span>
         </button>
         <select
           onChange={(e) => {
@@ -294,31 +294,6 @@ const Write = () => {
         style={{
           display: 'none',
         }}
-      />
-      <div
-        style={{
-          color: '#7F7F7F',
-          fontSize: 18,
-          fontWeight: 500,
-          lineHeight: '32px',
-        }}
-      >
-        포인트
-      </div>
-      <input
-        name="pointId"
-        placeholder="포인트"
-        style={{
-          width: '100%',
-          border: 'none',
-          boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-          borderRadius: 8,
-          padding: 8,
-        }}
-        onChange={(e) => {
-          setPointId(e.target.value);
-        }}
-        value={pointId}
       />
       <Section title="날짜">
         <input
