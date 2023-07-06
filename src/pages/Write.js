@@ -206,7 +206,6 @@ const Write = () => {
           color: '#7F7F7F',
           width: '100%',
           height: 352,
-          paddingTop: 28,
           textAlign: 'center',
           fontSize: 18,
           lineHeight: '28px',
@@ -215,29 +214,39 @@ const Write = () => {
           alignItems: 'center',
         }}
       >
-        <div
-          style={{
-            marginBottom: 24,
-          }}
-        >
-          함께 공유하고 싶은 바다를 <br />
-          자랑해줍서!
-        </div>
-        <div
-          style={{
-            backgroundColor: '#327AEB',
-            borderRadius: '50%',
-            width: 72,
-            height: 72,
-            display: 'inline-flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            cursor: 'pointer',
-          }}
-          onClick={onUploadImageButtonClick}
-        >
-          <img src="/img/plus.svg" width={28} height={28} />
-        </div>
+        {imgFile ? (
+          <img src={imgFile} width="100%" height="100%" />
+        ) : (
+          <div
+            style={{
+              marginTop: 28,
+            }}
+          >
+            <div
+              style={{
+                marginBottom: 24,
+              }}
+            >
+              함께 공유하고 싶은 바다를 <br />
+              자랑해줍서!
+            </div>
+            <div
+              style={{
+                backgroundColor: '#327AEB',
+                borderRadius: '50%',
+                width: 72,
+                height: 72,
+                display: 'inline-flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                cursor: 'pointer',
+              }}
+              onClick={onUploadImageButtonClick}
+            >
+              <img src="/img/plus.svg" width={28} height={28} />
+            </div>
+          </div>
+        )}
       </div>
       <input
         type="file"
