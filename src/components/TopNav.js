@@ -9,7 +9,7 @@ const TopNav = ({ title, actionName, action }) => {
     <div>
       <NavbarContainer>
         <MdNavigateBefore
-          className="icon"
+          className="icon cursor-pointer"
           size="30"
           color="black"
           onClick={() => {
