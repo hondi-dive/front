@@ -3,88 +3,91 @@ import React, { useEffect } from 'react';
 const KakaoMap = () => {
   useEffect(() => {
     if (typeof window.kakao !== 'undefined' && window.kakao.maps) {
-        let markers = [];
-        const mapContainer = document.getElementById('map');
-        const mapOption = {
-            center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-            level: 3,
-        };
+      let markers = [];
+      const mapContainer = document.getElementById('map');
+      const mapOption = {
+        center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3,
+      };
 
       const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
-        
-    let positions = [
+      let positions = [
         {
-            content: '<div>판포포구</div>', 
-            latlng: new kakao.maps.LatLng(33.365216, 126.200269)
+          content: '<div>판포포구</div>',
+          latlng: new kakao.maps.LatLng(33.365216, 126.200269),
         },
         {
-            content: '<div>월령포구</div>', 
-            latlng: new kakao.maps.LatLng(33.378558, 126.216320)
+          content: '<div>월령포구</div>',
+          latlng: new kakao.maps.LatLng(33.378558, 126.21632),
         },
         {
-            content: '<div>범섬</div>', 
-            latlng: new kakao.maps.LatLng(33.218354, 126.516717)
+          content: '<div>범섬</div>',
+          latlng: new kakao.maps.LatLng(33.218354, 126.516717),
         },
         {
-          content: '<div>월평포구</div>', 
-          latlng: new kakao.maps.LatLng(33.234152, 126.463248)
-      },
-      {
-          content: '<div>황우지선녀탕</div>', 
-          latlng: new kakao.maps.LatLng(33.239479, 126.548912)
-      },
-      {
-          content: '<div>김녕해변</div>', 
-          latlng: new kakao.maps.LatLng( 33.557752, 126.758989)
-      },
-        {
-            content: '<div>중문해수욕장</div>',
-            latlng: new kakao.maps.LatLng(33.243064, 126.412131)
+          content: '<div>월평포구</div>',
+          latlng: new kakao.maps.LatLng(33.234152, 126.463248),
         },
         {
-          content: '<div>함덕해변</div>', 
-          latlng: new kakao.maps.LatLng(333.543495, 126.669673)
-      },
-      {
-          content: '<div>이호테우해변</div>', 
-          latlng: new kakao.maps.LatLng(33.498197, 126.452930)
-      },
-      {
-          content: '<div>협재해변</div>', 
-          latlng: new kakao.maps.LatLng(33.394390, 126.239582)
-      }
-    ];
+          content: '<div>황우지선녀탕</div>',
+          latlng: new kakao.maps.LatLng(33.239479, 126.548912),
+        },
+        {
+          content: '<div>김녕해변</div>',
+          latlng: new kakao.maps.LatLng(33.557752, 126.758989),
+        },
+        {
+          content: '<div>중문해수욕장</div>',
+          latlng: new kakao.maps.LatLng(33.243064, 126.412131),
+        },
+        {
+          content: '<div>함덕해변</div>',
+          latlng: new kakao.maps.LatLng(333.543495, 126.669673),
+        },
+        {
+          content: '<div>이호테우해변</div>',
+          latlng: new kakao.maps.LatLng(33.498197, 126.45293),
+        },
+        {
+          content: '<div>협재해변</div>',
+          latlng: new kakao.maps.LatLng(33.39439, 126.239582),
+        },
+      ];
 
-    for (let i = 0; i < positions.length; i ++) {
+      for (let i = 0; i < positions.length; i++) {
         // 마커를 생성합니다
         let marker = new kakao.maps.Marker({
-            map: map, // 마커를 표시할 지도
-            position: positions[i].latlng // 마커의 위치
+          map: map, // 마커를 표시할 지도
+          position: positions[i].latlng, // 마커의 위치
         });
-    
-        // 마커에 표시할 인포윈도우를 생성합니다 
+
+        // 마커에 표시할 인포윈도우를 생성합니다
         let infowindow = new kakao.maps.InfoWindow({
-            content: positions[i].content // 인포윈도우에 표시할 내용
+          content: positions[i].content, // 인포윈도우에 표시할 내용
         });
 
-        // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+        // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
         function makeOverListener(map, marker, infowindow) {
-            return function() {
-                infowindow.open(map, marker);
-            };
+          return function () {
+            infowindow.open(map, marker);
+          };
         }
 
-        // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+        // 인포윈도우를 닫는 클로저를 만드는 함수입니다
         function makeOutListener(infowindow) {
-            return function() {
-                infowindow.close();
-            };
+          return function () {
+            infowindow.close();
+          };
         }
 
-        kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+        kakao.maps.event.addListener(
+          marker,
+          'mouseover',
+          makeOverListener(map, marker, infowindow),
+        );
         kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-    }
+      }
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -124,7 +127,7 @@ const KakaoMap = () => {
     <div
       id="map"
       style={{
-        width: '411px',
+        width: '100%',
         height: '800px',
         margin: '0 auto',
         position: 'relative',

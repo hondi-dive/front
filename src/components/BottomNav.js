@@ -9,39 +9,38 @@ const BottomNav = ({ title, actionName, action }) => {
 
   return (
     <div>
-        <NavbarMainContainer>
+      <NavbarMainContainer>
         <NavbarContainer>
-        <GoHomeFill
-          className="icon"
-          size="30"
-          color="#327AEB"
-          cursor="pointer"
-          onClick={() => {
-            navigate('/');
-          }}
-        />
-            <AiFillPlusCircle
+          <GoHomeFill
+            className="icon"
+            size="30"
+            color="#327AEB"
+            cursor="pointer"
+            onClick={() => {
+              navigate('/');
+            }}
+          />
+          <AiFillPlusCircle
             className="icon"
             size="60"
             color="#327AEB"
             cursor="pointer"
             onClick={() => {
-                navigate('/write');
+              navigate('/write');
             }}
-            />
+          />
 
-        <BsPerson
-          className="icon"
-          size="30"
-          color="#327AEB"
-          cursor="pointer"
-          onClick={() => {
-            navigate('/');
-          }}
-        />
-      </NavbarContainer>
-        </NavbarMainContainer>
-      
+          <BsPerson
+            className="icon"
+            size="30"
+            color="#327AEB"
+            cursor="pointer"
+            onClick={() => {
+              navigate('/');
+            }}
+          />
+        </NavbarContainer>
+      </NavbarMainContainer>
     </div>
   );
 };
@@ -61,10 +60,11 @@ export const NavbarContainer = styled.div`
   left: 0;
   right: 0;
   overflow: hidden;
-  max-width: 400px;
+  max-width: 396px;
   margin: 0 auto;
   z-index: 99;
-  border-radius: 20px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
   position: fixed;
 `;
 
@@ -86,11 +86,11 @@ export const NavbarAction = styled.div`
 `;
 
 export const NavbarMainContainer = styled.div`
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 99;
-    width: 100vw;
-    border-radius: 20px;
-    `;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  width: 100vw;
+  border-radius: 20px;
+`;
