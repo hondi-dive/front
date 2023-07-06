@@ -38,7 +38,6 @@ const Main = () => {
       <S.MainImgContainer>
         <img src="img/main-img.png" alt="메인이미지" width="100%" />
       </S.MainImgContainer>
-      <div style={{ backgroundColor: 'white', width: '100%', height: '100%' }} />
     </S.MainContainer>
   );
 };

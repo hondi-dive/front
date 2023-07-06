@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 import { createPoint } from 'apis/points';
 import TopNav from 'components/TopNav';
@@ -11,6 +12,7 @@ const staticServerUri = process.env.REACT_APP_PATH || '';
 const Write = () => {
   const inputRef = useRef(null);
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
 
   const [isMap, setIsMap] = useState(false);
   const [imgFile, setImgFile] = useState();
@@ -85,6 +87,7 @@ const Write = () => {
       maxDepth: Number(maxDepth),
       pointDepth: Number(pointDepth),
       decompression,
+      userName: cookies.accessToken,
     };
 
     formData.append('contents', new Blob([JSON.stringify(value)], { type: 'application/json' }));
