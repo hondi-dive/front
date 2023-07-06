@@ -8,7 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [userId, setUserId] = useState();
-  const [cookies, setCookie, removeCookie] = useCookies(['userId']);
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
 
   return (
     <S.SubContainer>
@@ -32,7 +32,7 @@ const Login = () => {
           />
           <div
             onClick={() => {
-              setCookie('userId', userId, { path: '/', maxAge: 9999999999999 });
+              setCookie('accessToken', userId, { path: '/', maxAge: 9999999999999 });
               navigate('/points');
             }}
           >

@@ -7,14 +7,14 @@ import * as S from 'components/pages/main/Main.style';
 const Main = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-  const [cookies, setCookie, removeCookie] = useCookies(['userId']);
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
 
   const staticServerUri = process.env.REACT_APP_PATH || '';
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      if (cookies.userId) {
+      if (cookies.accessToken) {
         navigate(staticServerUri + '/points');
       } else {
         navigate(staticServerUri + '/login');
