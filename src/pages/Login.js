@@ -8,7 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [userId, setUserId] = useState();
-  const [cookies, setCookie, removeCookie] = useCookies(['userId']);
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
 
   return (
     <S.SubContainer>
@@ -25,18 +25,22 @@ const Login = () => {
         <img src="img/second-img.png" alt="메인이미지" width="100%" />
         <S.SocialLoginDescription>SNS 계정으로 간편 가입하기</S.SocialLoginDescription>
         <S.SocialLoginContainer>
-          <input
-            onChange={(e) => {
-              setUserId(e.target.value);
-            }}
-          />
-          <div
-            onClick={() => {
-              setCookie('userId', userId, { path: '/', maxAge: 9999999999999 });
-              navigate('/points');
-            }}
-          >
-            제출
+          <div className=" relative p-1.5 shadow-lg">
+            <input
+              className="p-2"
+              onChange={(e) => {
+                setUserId(e.target.value);
+              }}
+            />
+            <div
+              onClick={() => {
+                setCookie('accessToken', userId, { path: '/', maxAge: 9999999999999 });
+                navigate('/points');
+              }}
+              className="absolute right-[1px] top-[11px] cursor-pointer bg-[#327aeb] py-3 text-white px-3"
+            >
+              제출
+            </div>
           </div>
         </S.SocialLoginContainer>
       </S.SubImgContainer>
