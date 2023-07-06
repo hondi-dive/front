@@ -115,7 +115,7 @@ const Write = () => {
   return (
     <div
       style={{
-        padding: '0px 24px 0 24px',
+        padding: '0px 24px 12px 24px',
       }}
     >
       <TopNav
