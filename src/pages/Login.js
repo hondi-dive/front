@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import * as S from 'components/pages/main/Main.style';
 
+const staticServerUri = process.env.REACT_APP_PATH || '';
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -35,7 +37,7 @@ const Login = () => {
             <div
               onClick={() => {
                 setCookie('accessToken', userId, { path: '/', maxAge: 9999999999999 });
-                navigate('/points');
+                navigate(staticServerUri + '/points');
               }}
               className="absolute right-[1px] top-[11px] cursor-pointer bg-[#327aeb] py-3 text-white px-3"
             >

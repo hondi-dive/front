@@ -7,6 +7,8 @@ import { fetchFeed } from 'apis/points';
 import * as S from 'components/pages/feed/Feed.style';
 import TopNav from 'components/TopNav';
 
+const staticServerUri = process.env.REACT_APP_PATH || '';
+
 const Feed = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -150,7 +152,7 @@ const Feed = () => {
                 key={image.id}
                 src={image.imgUrl}
                 onClick={() => {
-                  navigate(`/feed/${image.id}`);
+                  navigate(staticServerUri + `/feed/${image.id}`);
                 }}
               />
             ))}

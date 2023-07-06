@@ -6,6 +6,8 @@ import TopNav from 'components/TopNav';
 import { shareKakao } from 'utils/shareKakao';
 import { fetchDetailLog } from 'apis/points';
 
+const staticServerUri = process.env.REACT_APP_PATH || '';
+
 const FeedDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -134,7 +136,7 @@ const FeedDetail = () => {
             marginBottom: 24,
           }}
           onClick={() => {
-            navigate(`/logs/${id}`);
+            navigate(staticServerUri + `/logs/${id}`);
           }}
         >
           로그기록 보러가기

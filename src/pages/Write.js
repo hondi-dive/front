@@ -6,6 +6,8 @@ import TopNav from 'components/TopNav';
 import Section from 'components/pages/write/Section';
 import KakaoMap from 'components/pages/map/KakaoMap';
 
+const staticServerUri = process.env.REACT_APP_PATH || '';
+
 const Write = () => {
   const inputRef = useRef(null);
   const navigate = useNavigate();
@@ -136,7 +138,7 @@ const Write = () => {
         actionName="저장"
         action={() => {
           onFinish();
-          navigate(`/points`);
+          navigate(staticServerUri + `/points`);
         }}
       />
       <div

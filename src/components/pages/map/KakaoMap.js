@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
+const staticServerUri = process.env.REACT_APP_PATH || '';
+
 const KakaoMap = ({ title, id, action }) => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -91,7 +93,7 @@ const KakaoMap = ({ title, id, action }) => {
           if (action) {
             action(positions[i]);
           } else {
-            navigate(`/feed?${queryParams.toString()}`, {
+            navigate(staticServerUri + `/feed?${queryParams.toString()}`, {
               state: { feed: positions[i] },
             });
           }

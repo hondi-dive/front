@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { BsPerson } from 'react-icons/bs';
 import { AiFillPlusCircle } from 'react-icons/ai';
 
+const staticServerUri = process.env.REACT_APP_PATH || '';
+
 const BottomNav = () => {
   const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ const BottomNav = () => {
             color="#327AEB"
             cursor="pointer"
             onClick={() => {
-              navigate('/points');
+              navigate(staticServerUri + '/points');
             }}
           />
           <AiFillPlusCircle
@@ -26,7 +28,7 @@ const BottomNav = () => {
             color="#327AEB"
             cursor="pointer"
             onClick={() => {
-              navigate('/write');
+              navigate(staticServerUri + '/write');
             }}
           />
 
@@ -36,7 +38,7 @@ const BottomNav = () => {
             color="#327AEB"
             cursor="pointer"
             onClick={() => {
-              navigate('/');
+              navigate(staticServerUri + '/');
             }}
           />
         </NavbarContainer>
