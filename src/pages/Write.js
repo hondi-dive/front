@@ -115,8 +115,6 @@ const Write = () => {
     inputRef.current.click();
   };
 
-  console.log(pointId);
-
   return (
     <div
       style={{
