@@ -41,7 +41,7 @@ export const NavbarContainer = styled.div`
   background: #fff;
   box-shadow: 0px 0px 12px 3px rgba(56, 56, 56, 0.1);
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   text-align: center;
   align-items: center;
   position: fixed;
