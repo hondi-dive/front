@@ -1,44 +1,59 @@
 import { useNavigate } from 'react-router-dom';
+import { MdNavigateBefore } from "react-icons/md";
+import styled from 'styled-components';
 
 const TopNav = ({ title, actionName, action }) => {
   const navigate = useNavigate();
 
   return (
-    <div
-      style={{
-        height: 64,
-        display: 'flex',
-        justifyContent: 'space-between',
-        paddingTop: 23,
-        position: 'fixed',
-        margin: '0 auto',
-        top: 0,
-        backgroundColor: 'white',
-        width: '345px',
-        boxShadow: '0px 0px 12px 3px rgba(56, 56, 56, 0.10)',
-      }}
-    >
-      <div
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        <img src="/img/back.svg" width={20} height={20} />
-        뒤로가기
-      </div>
-      <div>{title}</div>
-      <div
-        style={{
-          fontSize: 18,
-          fontWeight: 700,
-          color: '#426BFF',
-        }}
-        onClick={action}
-      >
-        {actionName}
-      </div>
-    </div>
+    <div>
+        <NavbarContainer>
+            <MdNavigateBefore className="icon" size="30" color="black"  onClick={() => {
+              navigate(-1);
+            }}/>
+            <NavbarPosition>{title}</NavbarPosition>  
+            <NavbarAction style={{
+            fontSize: 18,
+            fontWeight: 700,
+            color: '#426BFF',
+          }}
+          onClick={action} >{actionName}</NavbarAction>
+        </NavbarContainer>
+  </div>
   );
 };
 
 export default TopNav;
+
+export const NavbarContainer = styled.div`
+    width: 100%;
+    height: 50px;
+    flex-shrink: 0;
+    background: #FFF;
+    box-shadow: 0px 0px 12px 3px rgba(56, 56, 56, 0.10);
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    overflow: hidden;
+`;
+
+export const NavbarPosition = styled.div`
+color: #000;
+font-family: Pretendard;
+font-size: px;
+font-style: normal;
+font-weight: 500;
+line-height: 18px;
+text-transform: uppercase;
+`;
+
+export const NavbarAction = styled.div`
+fontSize: 18px,
+fontWeight: 700,
+color: '#426BFF'
+`;
