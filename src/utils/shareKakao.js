@@ -1,5 +1,4 @@
 export const shareKakao = (img) => {
-  console.log(img);
   if (window.Kakao) {
     const kakao = window.Kakao;
     if (!kakao.isInitialized()) {

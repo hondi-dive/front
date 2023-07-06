@@ -35,11 +35,7 @@ const FeedDetail = () => {
     return <div />;
   }
 
-  console.log(detail);
-
   const dsa = (name) => {
-    console.log(name);
-
     if (name === 'SCUBA') {
       return '스쿠버';
     }

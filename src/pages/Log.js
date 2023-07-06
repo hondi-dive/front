@@ -23,8 +23,6 @@ const Log = () => {
     return <div />;
   }
 
-  console.log(detail);
-
   return (
     <div
       style={{
