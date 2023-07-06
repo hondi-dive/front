@@ -47,10 +47,10 @@ const Feed = () => {
       return '/img/bottle.svg';
     }
     if (data === 'FREEDIVING') {
-      return '/img/bottle2.svg';
+      return '/img/bottle3.svg';
     }
     if (data === 'SNORKEL') {
-      return '/img/bottle3.svg';
+      return '/img/bottle2.svg';
     }
   };
 
