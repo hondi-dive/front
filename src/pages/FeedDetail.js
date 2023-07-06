@@ -1,7 +1,11 @@
 import TopNav from 'components/TopNav';
 import styled from 'styled-components';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const FeedDetail = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+
   return (
     <Container>
       <TopNav title="광치기 해변" />
@@ -78,6 +82,9 @@ const FeedDetail = () => {
             width: '100%',
             padding: '16px 0',
             marginBottom: 24,
+          }}
+          onClick={() => {
+            navigate('/logs/id');
           }}
         >
           로그기록 보러가기
