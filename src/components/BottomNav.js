@@ -17,7 +17,7 @@ const BottomNav = ({ title, actionName, action }) => {
             color="#327AEB"
             cursor="pointer"
             onClick={() => {
-              navigate('/');
+              navigate('/points');
             }}
           />
           <AiFillPlusCircle
