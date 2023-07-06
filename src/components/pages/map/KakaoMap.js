@@ -163,7 +163,7 @@ const KakaoMap = ({ title, id, action }) => {
       id="map"
       style={{
         width: '100%',
-        height: '800px',
+        height: '100vh',
         margin: '0 auto',
         position: 'relative',
       }}

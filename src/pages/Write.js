@@ -82,7 +82,7 @@ const Write = () => {
       pointDepth: Number(pointDepth),
       decompression,
     };
-    console.log(value);
+
     formData.append('contents', new Blob([JSON.stringify(value)], { type: 'application/json' }));
 
     const res = await createPoint(formData);
