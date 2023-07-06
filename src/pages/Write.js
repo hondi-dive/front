@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import TopNav from 'components/TopNav';
 import { createPoint } from 'apis/points';
@@ -25,24 +25,41 @@ const Write = () => {
   const [maxDepth, setMaxDepth] = useState();
   const [pointDepth, setPointDepth] = useState();
   const [decompression, setDecompression] = useState();
+  const [preImg, setPreImg] = useState();
+
+  useEffect(() => {
+    setEyesight();
+    setDiveEntry();
+    setSurfaceFlow();
+    setDeepFlow();
+    setWaterTemp();
+    setTemp();
+    setDiveTime();
+    setBeforeIntake();
+    setAfterIntake();
+    setMaxDepth();
+    setPointDepth();
+    setDecompression();
+  }, [category]);
 
   const onUploadImage = async (e) => {
     if (!e.target.files) {
       return;
     }
     const file = e.target.files[0];
+    setImgFile(file);
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImgFile(reader.result);
+      setPreImg(reader.result);
     };
   };
 
   const onFinish = async () => {
     const formData = new FormData();
 
-    formData.append('imgFile', new Blob([imgFile], { type: 'image/png' }));
+    formData.append('imgFile', imgFile);
 
     const value = {
       category,
@@ -219,8 +236,8 @@ const Write = () => {
           alignItems: 'center',
         }}
       >
-        {imgFile ? (
-          <img src={imgFile} width="100%" height="100%" />
+        {preImg ? (
+          <img src={preImg} width="100%" height="100%" />
         ) : (
           <div
             style={{
