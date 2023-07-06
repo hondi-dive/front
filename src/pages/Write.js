@@ -3,10 +3,12 @@ import { useState, useRef, useEffect } from 'react';
 import TopNav from 'components/TopNav';
 import { createPoint } from 'apis/points';
 import Section from 'components/pages/write/Section';
+import KakaoMap from 'components/pages/map/KakaoMap';
 
 const Write = () => {
   const inputRef = useRef(null);
 
+  const [isMap, setIsMap] = useState(false);
   const [imgFile, setImgFile] = useState();
   const [category, setCategory] = useState('SNORKEL');
   const [pointId, setPointId] = useState();
@@ -112,12 +114,23 @@ const Write = () => {
     }
     inputRef.current.click();
   };
+
+  console.log(pointId);
+
   return (
     <div
       style={{
-        padding: '0px 24px 12px 24px',
+        padding: isMap ? '0' : '0px 24px 12px 24px',
       }}
     >
+      {isMap && (
+        <KakaoMap
+          action={(id) => {
+            setIsMap(false);
+            setPointId(id);
+          }}
+        />
+      )}
       <TopNav
         title="나의 로그 작성하기"
         actionName="저장"
@@ -155,6 +168,9 @@ const Write = () => {
             display: 'inline-flex',
             justifyContent: 'center',
             alignItems: 'center',
+          }}
+          onClick={() => {
+            setIsMap(true);
           }}
         >
           <img
