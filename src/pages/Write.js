@@ -129,7 +129,7 @@ const Write = () => {
       >
         <button
           style={{
-            width: 160,
+            maxWidth: 160,
             height: 56,
             padding: 16,
             fontSize: 18,
@@ -156,7 +156,8 @@ const Write = () => {
             setCategory(e.target.value);
           }}
           style={{
-            width: 160,
+            width: '100%',
+            maxWidth: 160,
             border: 'none',
             color: '#7F7F7F',
             fontSize: 18,
@@ -188,16 +189,18 @@ const Write = () => {
         >
           활동은 어떠셨나요?
         </div>
-        {[1, 2, 3, 4, 5].map((el) => (
-          <img
-            key={el}
-            onClick={() => handleStarClick(el)}
-            src={star[el] ? '/img/active-star.svg' : '/img/star.svg'}
-            style={{
-              cursor: 'pointer',
-            }}
-          />
-        ))}
+        <div className="flex space-x-4 mx-auto justify-center">
+          {[1, 2, 3, 4, 5].map((el) => (
+            <img
+              key={el}
+              onClick={() => handleStarClick(el)}
+              src={star[el] ? '/img/active-star.svg' : '/img/star.svg'}
+              style={{
+                cursor: 'pointer',
+              }}
+            />
+          ))}
+        </div>
       </div>
       <div
         style={{
@@ -304,7 +307,6 @@ const Write = () => {
       </Section>
       <Section title="테스트">
         <textarea
-          className="scrollbar-hide h-8 w-full resize-none pt-2 pl-4 text-sm font-thin"
           style={{
             lineHeight: 1.5,
             width: '100%',
@@ -332,123 +334,148 @@ const Write = () => {
             display: 'flex',
             justifyContent: 'space-between',
           }}
+          className=" space-x-2 w-full"
         >
-          <input
-            type="radio"
-            id="BEATCH"
-            value="BEATCH"
-            checked={diveEntry === 'BEATCH'}
-            onClick={handleOptionChange}
-          />
-          <label for="BEATCH" style={{ padding: '8px 38px' }}>
-            해안
-          </label>
-          <input
-            type="radio"
-            id="BOAT"
-            value="BOAT"
-            checked={diveEntry === 'BOAT'}
-            onClick={handleOptionChange}
-          />
-          <label for="BOAT" style={{ padding: '8px 38px' }}>
-            보트
-          </label>
-          <input
-            type="radio"
-            value="ETC"
-            id="ETC"
-            checked={diveEntry === 'ETC'}
-            onClick={handleOptionChange}
-          />
-          <label for="ETC" style={{ padding: '8px 38px' }}>
-            기타
-          </label>
+          <div className="w-full">
+            <input
+              type="radio"
+              id="BEATCH"
+              value="BEATCH"
+              checked={diveEntry === 'BEATCH'}
+              onClick={handleOptionChange}
+            />
+            <label for="BEATCH" style={{ padding: '8px 0' }} className="w-full">
+              해안
+            </label>
+          </div>
+          <div className="w-full">
+            <input
+              type="radio"
+              id="BOAT"
+              value="BOAT"
+              checked={diveEntry === 'BOAT'}
+              onClick={handleOptionChange}
+            />
+            <label for="BOAT" style={{ padding: '8px 0' }} className="w-full">
+              보트
+            </label>
+          </div>
+          <div className="w-full">
+            <input
+              type="radio"
+              value="ETC"
+              id="ETC"
+              checked={diveEntry === 'ETC'}
+              onClick={handleOptionChange}
+            />
+            <label for="ETC" style={{ padding: '8px 0' }} className="w-full">
+              기타
+            </label>
+          </div>
         </div>
       </Section>
       <Section title="수면해류">
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <input
-            type="radio"
-            id="STRONG"
-            value="STRONG"
-            checked={surfaceFlow === 'STRONG'}
-            onClick={handleOptionChange2}
-          />
-          <label for="STRONG" style={{ padding: '8px 24px' }}>
-            강한해류
-          </label>
-          <input
-            type="radio"
-            value="MIDDLE"
-            id="MIDDLE"
-            checked={surfaceFlow === 'MIDDLE'}
-            onClick={handleOptionChange2}
-          />
-          <label for="MIDDLE" style={{ padding: '8px 24px' }}>
-            보통해류
-          </label>
-          <input
-            type="radio"
-            id="WEEK"
-            value="WEEK"
-            checked={surfaceFlow === 'WEEK'}
-            onClick={handleOptionChange2}
-          />
-          <label for="WEEK" style={{ padding: '8px 24px' }}>
-            약한해류
-          </label>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }} className=" space-x-2">
+          <div className="w-full">
+            <input
+              type="radio"
+              id="STRONG"
+              value="STRONG"
+              checked={surfaceFlow === 'STRONG'}
+              onClick={handleOptionChange2}
+            />
+            <label for="STRONG" style={{ padding: '8px 0' }} className="w-full">
+              강한해류
+            </label>
+          </div>
+          <div className="w-full">
+            <input
+              type="radio"
+              value="MIDDLE"
+              id="MIDDLE"
+              checked={surfaceFlow === 'MIDDLE'}
+              onClick={handleOptionChange2}
+            />
+            <label for="MIDDLE" style={{ padding: '8px 0' }} className="w-full">
+              보통해류
+            </label>
+          </div>
+          <div className="w-full">
+            <input
+              type="radio"
+              id="WEEK"
+              value="WEEK"
+              checked={surfaceFlow === 'WEEK'}
+              onClick={handleOptionChange2}
+            />
+            <label for="WEEK" style={{ padding: '8px 0' }} className="w-full">
+              약한해류
+            </label>
+          </div>
         </div>
       </Section>
       <Section title="심층해류">
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <input
-            type="radio"
-            id="STRONG2"
-            value="STRONG"
-            checked={deepFlow === 'STRONG'}
-            onClick={handleOptionChange3}
-          />
-          <label for="STRONG2" style={{ padding: '8px 24px' }}>
-            강한해류
-          </label>
-          <input
-            type="radio"
-            id="MIDDLE2"
-            value="MIDDLE"
-            checked={deepFlow === 'MIDDLE'}
-            onClick={handleOptionChange3}
-          />
-          <label for="MIDDLE2" style={{ padding: '8px 24px' }}>
-            보통해류
-          </label>
-          <input
-            type="radio"
-            value="WEEK"
-            id="WEEK2"
-            checked={deepFlow === 'WEEK'}
-            onClick={handleOptionChange3}
-          />
-          <label for="WEEK2" style={{ padding: '8px 24px' }}>
-            약한해류
-          </label>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }} className="space-x-2">
+          <div className="w-full">
+            <input
+              type="radio"
+              id="STRONG2"
+              value="STRONG"
+              checked={deepFlow === 'STRONG'}
+              onClick={handleOptionChange3}
+            />
+            <label for="STRONG2" style={{ padding: '8px 0' }} className="w-full">
+              강한해류
+            </label>
+          </div>
+          <div className="w-full">
+            <input
+              type="radio"
+              id="MIDDLE2"
+              value="MIDDLE"
+              checked={deepFlow === 'MIDDLE'}
+              onClick={handleOptionChange3}
+            />
+            <label for="MIDDLE2" style={{ padding: '8px 0' }} className="w-full">
+              보통해류
+            </label>
+          </div>
+          <div className="w-full">
+            <input
+              type="radio"
+              value="WEEK"
+              id="WEEK2"
+              checked={deepFlow === 'WEEK'}
+              onClick={handleOptionChange3}
+            />
+            <label for="WEEK2" style={{ padding: '8px 0' }} className="w-full">
+              약한해류
+            </label>
+          </div>
         </div>
       </Section>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }} className="space-x-4">
         <Section title="수온">
           <div
             style={{
-              width: '164px',
               border: 'none',
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
               position: 'relative',
-              padding: 12,
+              padding: '12px',
+              maxWidth: 164,
             }}
+            className="w-full"
           >
             <input
               name="waterTemp"
-              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+              style={{
+                border: 'none',
+                width: '100%',
+                height: '100%',
+                outline: 'none',
+              }}
               placeholder="수온"
               onChange={(e) => {
                 setWaterTemp(e.target.value);
@@ -470,13 +497,13 @@ const Write = () => {
         <Section title="기온">
           <div
             style={{
-              width: '164px',
               border: 'none',
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
               position: 'relative',
-              padding: 12,
+              padding: '12px',
+              maxWidth: 164,
             }}
           >
             <input
@@ -501,24 +528,29 @@ const Write = () => {
           </div>
         </Section>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }} className="space-x-4">
         <Section title="입수전 잔량">
           <div
             style={{
-              width: '164px',
               border: 'none',
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
               position: 'relative',
               padding: 12,
+              maxWidth: 164,
             }}
           >
             <input
               name="beforeIntake"
               placeholder="입수전 잔량"
               type="number"
-              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+              style={{
+                border: 'none',
+                width: '100%',
+                height: '100%',
+                outline: 'none',
+              }}
               onChange={(e) => {
                 setBeforeIntake(e.target.value);
               }}
@@ -538,13 +570,13 @@ const Write = () => {
         <Section title="입수후 잔량">
           <div
             style={{
-              width: '164px',
               border: 'none',
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
               position: 'relative',
               padding: 12,
+              maxWidth: 164,
             }}
           >
             <input
@@ -569,17 +601,17 @@ const Write = () => {
           </div>
         </Section>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }} className=" space-x-4">
         <Section title="다이브 최고수심">
           <div
             style={{
-              width: '164px',
               border: 'none',
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
               position: 'relative',
               padding: 12,
+              maxWidth: 164,
             }}
           >
             <input
@@ -606,13 +638,13 @@ const Write = () => {
         <Section title="포인트 수심">
           <div
             style={{
-              width: '164px',
               border: 'none',
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
               position: 'relative',
               padding: 12,
+              maxWidth: 164,
             }}
           >
             <input
@@ -637,17 +669,17 @@ const Write = () => {
           </div>
         </Section>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }} className=" space-x-4">
         <Section title="다이빙 시간">
           <div
             style={{
-              width: '164px',
               border: 'none',
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
               position: 'relative',
               padding: 12,
+              maxWidth: 164,
             }}
           >
             <input
@@ -673,13 +705,13 @@ const Write = () => {
         <Section title="감압 시간">
           <div
             style={{
-              width: '164px',
               border: 'none',
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
               position: 'relative',
               padding: 12,
+              maxWidth: 164,
             }}
           >
             <input
