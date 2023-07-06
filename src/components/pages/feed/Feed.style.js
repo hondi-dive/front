@@ -46,7 +46,8 @@ export const Title = styled.div`
 `;
 
 export const OptionContainer = styled.div`
-  width: 345px;
+  width: 100%;
+
   height: 40px;
   flex-shrink: 0;
   border-radius: 8px;
@@ -54,7 +55,7 @@ export const OptionContainer = styled.div`
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
   display: flex;
   justify-content: center;
-  margin: 0 auto;
+
   align-items: center;
   margin-top: 20px;
 `;

@@ -115,32 +115,34 @@ const Feed = () => {
           <S.Location>{feedData.pointName}</S.Location>
         </S.Tag>
         <S.Title>에서는 이렇게 놀고있어요!</S.Title>
-        <S.OptionContainer>
-          <S.Option
-            onClick={() => {
-              setFilter('SNORKEL');
-            }}
-          >
-            스노클
-          </S.Option>
-          <RxDividerVertical className="icon" size="30" color="black" />
-          <S.Option
-            onClick={() => {
-              setFilter('FREEDIVING');
-            }}
-          >
-            프리다이빙
-          </S.Option>
+        <div className="px-6">
+          <S.OptionContainer>
+            <S.Option
+              onClick={() => {
+                setFilter('SNORKEL');
+              }}
+            >
+              스노클
+            </S.Option>
+            <RxDividerVertical className="icon" size="30" color="black" />
+            <S.Option
+              onClick={() => {
+                setFilter('FREEDIVING');
+              }}
+            >
+              프리다이빙
+            </S.Option>
 
-          <RxDividerVertical className="icon" size="30" color="black" />
-          <S.Option
-            onClick={() => {
-              setFilter('SCUBA');
-            }}
-          >
-            스쿠버
-          </S.Option>
-        </S.OptionContainer>
+            <RxDividerVertical className="icon" size="30" color="black" />
+            <S.Option
+              onClick={() => {
+                setFilter('SCUBA');
+              }}
+            >
+              스쿠버
+            </S.Option>
+          </S.OptionContainer>
+        </div>
         <S.GalleryContainer>
           <S.Gallery>
             {feedData.divePostList.map((image) => (
