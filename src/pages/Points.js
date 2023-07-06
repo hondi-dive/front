@@ -10,19 +10,20 @@ const Points = () => {
       }}
     >
       <KakaoMap />
-
-      <button
-        style={{
-          position: 'absolute',
-          bottom: 10,
-          zIndex: 9999,
-          width: 100,
-          height: 50,
-          left: 10,
-        }}
-      >
-        <Link to="/">dsa</Link>
-      </button>
+      <Link to="/write">
+        <button
+          style={{
+            position: 'absolute',
+            bottom: 10,
+            zIndex: 9999,
+            width: 100,
+            height: 50,
+            left: 10,
+          }}
+        >
+          글쓰기
+        </button>
+      </Link>
     </div>
   );
 };
