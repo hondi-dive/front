@@ -41,7 +41,7 @@ export const StyledButton = styled.button`
     font-weight: 700;
     cursor: pointer;
     position: absolute;
-    left: 60px;
+    left: 80px;
     top: 650px;
     z-index: 9999;
 `;

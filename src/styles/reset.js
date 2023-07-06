@@ -45,11 +45,11 @@ table {
 	border-spacing: 0;
 }
 @font-face {
-  : 'SlowSlow';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/SlowSlow.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
+	font-family: 'SlowSlow';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/SlowSlow.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+  }
 `;
 
 export default GlobalStyles;
