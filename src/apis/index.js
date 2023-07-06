@@ -2,8 +2,8 @@ import Axios from 'axios';
 
 export const createApi = (headers) => {
   const _customAxios = Axios.create({
-    // baseURL: 'http://localhost:8080',
-    baseURL: 'http://172.30.1.85:3000',
+    baseURL: 'http://localhost:8080',
+    // baseURL: 'http://172.30.1.85:3000',
     withCredentials: true,
     validateStatus: (status) => status >= 200 && status < 400,
     headers: headers,
