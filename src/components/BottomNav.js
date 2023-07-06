@@ -38,7 +38,7 @@ const BottomNav = () => {
             color="#327AEB"
             cursor="pointer"
             onClick={() => {
-              navigate(staticServerUri + '/');
+              navigate(staticServerUri + '/mypage');
             }}
           />
         </NavbarContainer>
@@ -52,7 +52,7 @@ export default BottomNav;
 export const NavbarContainer = styled.div`
   width: 100%;
   height: 70px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 0px 12px 3px rgba(56, 56, 56, 0.1);
   display: flex;
   justify-content: space-around;
