@@ -53,12 +53,7 @@ table {
 ::after {
   box-sizing: border-box;
 }
-@font-face {
-	font-family: 'SlowSlow';
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/SlowSlow.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-  }
+
 	/* custom radio button */
 input[type=radio]{
 	width: 0;

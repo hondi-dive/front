@@ -1,55 +1,78 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-const KakaoMap = () => {
+const KakaoMap = ({ title, id }) => {
+  const navigate = useNavigate();
   useEffect(() => {
     if (typeof window.kakao !== 'undefined' && window.kakao.maps) {
       let markers = [];
       const mapContainer = document.getElementById('map');
       const mapOption = {
         center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3,
+        level: 10,
       };
 
       const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
       let positions = [
         {
+          id: 1,
+          title : '판포포구',
           content: '<div>판포포구</div>',
           latlng: new kakao.maps.LatLng(33.365216, 126.200269),
         },
         {
+          id:2,
+          title : '월령포구',
           content: '<div>월령포구</div>',
           latlng: new kakao.maps.LatLng(33.378558, 126.21632),
         },
         {
+          id: 3,
+          title : '범섬',
           content: '<div>범섬</div>',
           latlng: new kakao.maps.LatLng(33.218354, 126.516717),
         },
         {
+          id: 4,
+          title : '월평포구',
           content: '<div>월평포구</div>',
           latlng: new kakao.maps.LatLng(33.234152, 126.463248),
         },
         {
+          id: 5,
+          title : '황우지선녀탕',
           content: '<div>황우지선녀탕</div>',
           latlng: new kakao.maps.LatLng(33.239479, 126.548912),
         },
         {
+          id: 6,
+          title : '김녕해변',
           content: '<div>김녕해변</div>',
           latlng: new kakao.maps.LatLng(33.557752, 126.758989),
         },
         {
+          id: 7,
+          title : '중문해수욕장',
           content: '<div>중문해수욕장</div>',
           latlng: new kakao.maps.LatLng(33.243064, 126.412131),
         },
         {
+          id: 8,
+          title : '함덕해변',
           content: '<div>함덕해변</div>',
-          latlng: new kakao.maps.LatLng(333.543495, 126.669673),
+          latlng: new kakao.maps.LatLng(33.543495, 126.669673),
         },
         {
+          id: 9,
+          title : '이호테우해변',
           content: '<div>이호테우해변</div>',
           latlng: new kakao.maps.LatLng(33.498197, 126.45293),
         },
         {
+          id: 10,
+          title : '협재해변',
           content: '<div>협재해변</div>',
           latlng: new kakao.maps.LatLng(33.39439, 126.239582),
         },
@@ -60,6 +83,15 @@ const KakaoMap = () => {
         let marker = new kakao.maps.Marker({
           map: map, // 마커를 표시할 지도
           position: positions[i].latlng, // 마커의 위치
+        });
+
+
+        // 클릭 이벤트 핸들러를 등록합니다
+        kakao.maps.event.addListener(marker, 'click', () => {
+          const queryParams = new URLSearchParams({ point: positions[i].id });
+          navigate(`/feed?${queryParams.toString()}`, {
+            state: { feed: positions[i] },
+          });
         });
 
         // 마커에 표시할 인포윈도우를 생성합니다
@@ -121,7 +153,7 @@ const KakaoMap = () => {
         map.setCenter(locPosition);
       }
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <div

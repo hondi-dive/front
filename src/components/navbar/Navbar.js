@@ -14,7 +14,7 @@ const Navbar = () => {
             />
             <NavbarContainer>
                 <MdNavigateBefore className="icon" size="30" color="black"  />
-                <NavbarPosition>광치기 해변</NavbarPosition>  
+                <NavbarPosition>월평포구</NavbarPosition>  
                 <MdNavigateNext className="icon" size="30" color="white"  />
             </NavbarContainer>
         </div>

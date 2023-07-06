@@ -49,8 +49,8 @@ export default BottomNav;
 
 export const NavbarContainer = styled.div`
   width: 100%;
-  height: 64px;
-  background: #fff;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.8); /* Adjust the alpha value (0.9) to control the transparency */
   box-shadow: 0px 0px 12px 3px rgba(56, 56, 56, 0.1);
   display: flex;
   justify-content: space-around;
@@ -67,6 +67,7 @@ export const NavbarContainer = styled.div`
   border-top-left-radius: 20px;
   position: fixed;
 `;
+
 
 export const NavbarPosition = styled.div`
   color: #000;
