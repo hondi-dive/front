@@ -1,6 +1,4 @@
 import * as S from 'components/pages/feed/Feed.style';
-import Navbar from 'navbar/Navbar';
-
 const Feed = () => {
   const images = [
     {
