@@ -21,3 +21,9 @@ export const createPoint = async (data) => {
 
   return res;
 };
+
+export const fetchFeed = async (id) => {
+  const res = await axios.get(`/diveposts/${id}`);
+
+  return res;
+};
