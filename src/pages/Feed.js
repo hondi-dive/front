@@ -1,17 +1,24 @@
-import * as S from 'components/pages/feed/Feed.style';
-import { HiLocationMarker } from 'react-icons/hi';
-import { Link } from 'react-router-dom';
-import TopNav from 'components/TopNav';
-import styled from 'styled-components';
-import { RxDividerVertical } from 'react-icons/rx';
-import { fetchFeed } from 'apis/points';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { HiLocationMarker } from 'react-icons/hi';
+import { RxDividerVertical } from 'react-icons/rx';
+
+import { fetchFeed } from 'apis/points';
+import * as S from 'components/pages/feed/Feed.style';
+import TopNav from 'components/TopNav';
 
 const Feed = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const pointId = searchParams.get('point');
   const [feedData, setFeedDate] = useState();
+  const [filter, setFilter] = useState();
+
+  useEffect(() => {
+    if (filter) {
+      loadFeed(filter);
+    }
+  }, [filter]);
 
   let positions = [
     {
@@ -75,11 +82,17 @@ const Feed = () => {
       latlng: new kakao.maps.LatLng(33.39439, 126.239582),
     },
   ];
+  console.log(filter);
+  const loadFeed = async (filter) => {
+    if (filter) {
+      const res = await fetchFeed(Number(pointId), filter);
 
-  const loadFeed = async () => {
-    const res = await fetchFeed(Number(pointId));
+      setFeedDate(res);
+    } else {
+      const res = await fetchFeed(Number(pointId));
 
-    setFeedDate(res);
+      setFeedDate(res);
+    }
   };
 
   useEffect(() => {
@@ -89,7 +102,7 @@ const Feed = () => {
   if (!feedData) {
     return <div />;
   }
-
+  console.log(feedData);
   return (
     <>
       <TopNav title={feedData.pointName} actionName="" />
@@ -103,29 +116,44 @@ const Feed = () => {
         </S.Tag>
         <S.Title>에서는 이렇게 놀고있어요!</S.Title>
         <S.OptionContainer>
-          <S.Option>스노쿨링</S.Option>
+          <S.Option
+            onClick={() => {
+              setFilter('SNORKEL');
+            }}
+          >
+            스노클
+          </S.Option>
           <RxDividerVertical className="icon" size="30" color="black" />
-          <S.Option>프리다이빙</S.Option>
+          <S.Option
+            onClick={() => {
+              setFilter('FREEDIVING');
+            }}
+          >
+            프리다이빙
+          </S.Option>
+
           <RxDividerVertical className="icon" size="30" color="black" />
-          <S.Option>스쿠버다이빙</S.Option>
+          <S.Option
+            onClick={() => {
+              setFilter('SCUBA');
+            }}
+          >
+            스쿠버
+          </S.Option>
         </S.OptionContainer>
-
-        {/* <S.GalleryContainer>
-        <S.Gallery>
-          {images.map((image) => (
-            <S.Image key={image.id} src={image.img} />
-          ))}
-        </S.Gallery>
-      </S.GalleryContainer> */}
-
-        <S.Wrap>
-          <S.Base src="/img/1.png"></S.Base>
-          <S.Short src="/img/2.png"></S.Short>
-          <S.Long src="/img/3.png"></S.Long>
-          <S.Short src="/img/4.png"></S.Short>
-          <S.Long src="/img/5.png"></S.Long>
-          <S.Base src="/img/6.png"></S.Base>
-        </S.Wrap>
+        <S.GalleryContainer>
+          <S.Gallery>
+            {feedData.divePostList.map((image) => (
+              <S.Image
+                key={image.id}
+                src={image.imgUrl}
+                onClick={() => {
+                  navigate(`/logs/${image.id}`);
+                }}
+              />
+            ))}
+          </S.Gallery>
+        </S.GalleryContainer>
       </S.Container>
     </>
   );

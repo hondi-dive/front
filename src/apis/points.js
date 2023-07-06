@@ -22,8 +22,12 @@ export const createPoint = async (data) => {
   return res;
 };
 
-export const fetchFeed = async (id) => {
-  const res = await axios.get(`/diveposts/${id}`);
-
-  return res;
+export const fetchFeed = async (id, filter) => {
+  if (filter) {
+    const res = await axios.get(`/diveposts/${id}?category=${filter}`);
+    return res;
+  } else {
+    const res = await axios.get(`/diveposts/${id}`);
+    return res;
+  }
 };
