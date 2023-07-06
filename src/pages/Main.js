@@ -9,13 +9,15 @@ const Main = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [cookies, setCookie, removeCookie] = useCookies(['userId']);
 
+  const staticServerUri = process.env.REACT_APP_PATH || '';
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
       if (cookies.userId) {
-        navigate('/points');
+        navigate(staticServerUri + '/points');
       } else {
-        navigate('/login');
+        navigate(staticServerUri + '/login');
       }
     }, 1000);
 
