@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import TopNav from 'components/TopNav';
 import { createPoint } from 'apis/points';
@@ -8,7 +8,7 @@ const Write = () => {
   const inputRef = useRef(null);
 
   const [imgFile, setImgFile] = useState();
-  const [category, setCategory] = useState('SCUBA');
+  const [category, setCategory] = useState('SNORKEL');
   const [pointId, setPointId] = useState();
   const [date, setDate] = useState();
   const [star, setStar] = useState([true, true, true, true, false, false]);
@@ -25,24 +25,41 @@ const Write = () => {
   const [maxDepth, setMaxDepth] = useState();
   const [pointDepth, setPointDepth] = useState();
   const [decompression, setDecompression] = useState();
+  const [preImg, setPreImg] = useState();
+
+  useEffect(() => {
+    setEyesight();
+    setDiveEntry();
+    setSurfaceFlow();
+    setDeepFlow();
+    setWaterTemp();
+    setTemp();
+    setDiveTime();
+    setBeforeIntake();
+    setAfterIntake();
+    setMaxDepth();
+    setPointDepth();
+    setDecompression();
+  }, [category]);
 
   const onUploadImage = async (e) => {
     if (!e.target.files) {
       return;
     }
     const file = e.target.files[0];
+    setImgFile(file);
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImgFile(reader.result);
+      setPreImg(reader.result);
     };
   };
 
   const onFinish = async () => {
     const formData = new FormData();
 
-    formData.append('imgFile', new Blob([imgFile], { type: 'image/png' }));
+    formData.append('imgFile', imgFile);
 
     const value = {
       category,
@@ -63,7 +80,7 @@ const Write = () => {
       pointDepth: Number(pointDepth),
       decompression,
     };
-    console.log(value);
+
     formData.append('contents', new Blob([JSON.stringify(value)], { type: 'application/json' }));
 
     const res = await createPoint(formData);
@@ -78,7 +95,6 @@ const Write = () => {
   };
 
   const handleOptionChange3 = (event) => {
-    console.log(event);
     setDeepFlow(event.target.value);
   };
 
@@ -99,7 +115,7 @@ const Write = () => {
   return (
     <div
       style={{
-        padding: '0px 24px 0 24px',
+        padding: '0px 24px 12px 24px',
       }}
     >
       <TopNav
@@ -129,7 +145,7 @@ const Write = () => {
       >
         <button
           style={{
-            width: 160,
+            maxWidth: 160,
             height: 56,
             padding: 16,
             fontSize: 18,
@@ -156,7 +172,8 @@ const Write = () => {
             setCategory(e.target.value);
           }}
           style={{
-            width: 160,
+            width: '100%',
+            maxWidth: 160,
             border: 'none',
             color: '#7F7F7F',
             fontSize: 18,
@@ -166,7 +183,9 @@ const Write = () => {
           }}
           value={category}
         >
-          <option value="scuba">스쿠버</option>
+          <option value="SNORKEL">스노클</option>
+          <option value="FREEDIVING">프리다이빙</option>
+          <option value="SCUBA">스쿠버</option>
         </select>
       </div>
       <div
@@ -188,16 +207,18 @@ const Write = () => {
         >
           활동은 어떠셨나요?
         </div>
-        {[1, 2, 3, 4, 5].map((el) => (
-          <img
-            key={el}
-            onClick={() => handleStarClick(el)}
-            src={star[el] ? '/img/active-star.svg' : '/img/star.svg'}
-            style={{
-              cursor: 'pointer',
-            }}
-          />
-        ))}
+        <div className="flex space-x-4 mx-auto justify-center">
+          {[1, 2, 3, 4, 5].map((el) => (
+            <img
+              key={el}
+              onClick={() => handleStarClick(el)}
+              src={star[el] ? '/img/active-star.svg' : '/img/star.svg'}
+              style={{
+                cursor: 'pointer',
+              }}
+            />
+          ))}
+        </div>
       </div>
       <div
         style={{
@@ -215,8 +236,8 @@ const Write = () => {
           alignItems: 'center',
         }}
       >
-        {imgFile ? (
-          <img src={imgFile} width="100%" height="100%" />
+        {preImg ? (
+          <img src={preImg} width="100%" height="100%" />
         ) : (
           <div
             style={{
@@ -302,9 +323,8 @@ const Write = () => {
           value={date}
         />
       </Section>
-      <Section title="테스트">
+      <Section>
         <textarea
-          className="scrollbar-hide h-8 w-full resize-none pt-2 pl-4 text-sm font-thin"
           style={{
             lineHeight: 1.5,
             width: '100%',
@@ -325,187 +345,432 @@ const Write = () => {
           placeholder="후기를 작성해줍서!"
         />
       </Section>
-
-      <Section title="입수형태">
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
-          <input
-            type="radio"
-            id="BEATCH"
-            value="BEATCH"
-            checked={diveEntry === 'BEATCH'}
-            onClick={handleOptionChange}
-          />
-          <label for="BEATCH" style={{ padding: '8px 38px' }}>
-            해안
-          </label>
-          <input
-            type="radio"
-            id="BOAT"
-            value="BOAT"
-            checked={diveEntry === 'BOAT'}
-            onClick={handleOptionChange}
-          />
-          <label for="BOAT" style={{ padding: '8px 38px' }}>
-            보트
-          </label>
-          <input
-            type="radio"
-            value="ETC"
-            id="ETC"
-            checked={diveEntry === 'ETC'}
-            onClick={handleOptionChange}
-          />
-          <label for="ETC" style={{ padding: '8px 38px' }}>
-            기타
-          </label>
+      {category !== 'SNORKEL' && (
+        <Section title="입수형태">
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+            className=" space-x-2 w-full"
+          >
+            <div className="w-full">
+              <input
+                type="radio"
+                id="BEATCH"
+                value="BEATCH"
+                checked={diveEntry === 'BEATCH'}
+                onClick={handleOptionChange}
+              />
+              <label for="BEATCH" style={{ padding: '8px 0' }} className="w-full">
+                해안
+              </label>
+            </div>
+            <div className="w-full">
+              <input
+                type="radio"
+                id="BOAT"
+                value="BOAT"
+                checked={diveEntry === 'BOAT'}
+                onClick={handleOptionChange}
+              />
+              <label for="BOAT" style={{ padding: '8px 0' }} className="w-full">
+                보트
+              </label>
+            </div>
+            <div className="w-full">
+              <input
+                type="radio"
+                value="ETC"
+                id="ETC"
+                checked={diveEntry === 'ETC'}
+                onClick={handleOptionChange}
+              />
+              <label for="ETC" style={{ padding: '8px 0' }} className="w-full">
+                기타
+              </label>
+            </div>
+          </div>
+        </Section>
+      )}
+      {category !== 'SNORKEL' && (
+        <Section title="수면해류">
+          <div style={{ display: 'flex', justifyContent: 'space-between' }} className=" space-x-2">
+            <div className="w-full">
+              <input
+                type="radio"
+                id="STRONG"
+                value="STRONG"
+                checked={surfaceFlow === 'STRONG'}
+                onClick={handleOptionChange2}
+              />
+              <label for="STRONG" style={{ padding: '8px 0' }} className="w-full">
+                강한해류
+              </label>
+            </div>
+            <div className="w-full">
+              <input
+                type="radio"
+                value="MIDDLE"
+                id="MIDDLE"
+                checked={surfaceFlow === 'MIDDLE'}
+                onClick={handleOptionChange2}
+              />
+              <label for="MIDDLE" style={{ padding: '8px 0' }} className="w-full">
+                보통해류
+              </label>
+            </div>
+            <div className="w-full">
+              <input
+                type="radio"
+                id="WEEK"
+                value="WEEK"
+                checked={surfaceFlow === 'WEEK'}
+                onClick={handleOptionChange2}
+              />
+              <label for="WEEK" style={{ padding: '8px 0' }} className="w-full">
+                약한해류
+              </label>
+            </div>
+          </div>
+        </Section>
+      )}
+      {category !== 'SNORKEL' && (
+        <Section title="심층해류">
+          <div style={{ display: 'flex', justifyContent: 'space-between' }} className="space-x-2">
+            <div className="w-full">
+              <input
+                type="radio"
+                id="STRONG2"
+                value="STRONG"
+                checked={deepFlow === 'STRONG'}
+                onClick={handleOptionChange3}
+              />
+              <label for="STRONG2" style={{ padding: '8px 0' }} className="w-full">
+                강한해류
+              </label>
+            </div>
+            <div className="w-full">
+              <input
+                type="radio"
+                id="MIDDLE2"
+                value="MIDDLE"
+                checked={deepFlow === 'MIDDLE'}
+                onClick={handleOptionChange3}
+              />
+              <label for="MIDDLE2" style={{ padding: '8px 0' }} className="w-full">
+                보통해류
+              </label>
+            </div>
+            <div className="w-full">
+              <input
+                type="radio"
+                value="WEEK"
+                id="WEEK2"
+                checked={deepFlow === 'WEEK'}
+                onClick={handleOptionChange3}
+              />
+              <label for="WEEK2" style={{ padding: '8px 0' }} className="w-full">
+                약한해류
+              </label>
+            </div>
+          </div>
+        </Section>
+      )}
+      {category !== 'SNORKEL' && (
+        <div style={{ display: 'flex', justifyContent: 'space-between' }} className="space-x-4">
+          <Section title="수온">
+            <div
+              style={{
+                border: 'none',
+                height: 56,
+                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                borderRadius: 8,
+                position: 'relative',
+                padding: '12px',
+                maxWidth: 164,
+              }}
+              className="w-full"
+            >
+              <input
+                name="waterTemp"
+                style={{
+                  border: 'none',
+                  width: '100%',
+                  height: '100%',
+                  outline: 'none',
+                }}
+                placeholder="수온"
+                onChange={(e) => {
+                  setWaterTemp(e.target.value);
+                }}
+                type="number"
+                value={waterTemp}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  right: 10,
+                  top: 21,
+                }}
+              >
+                ℃
+              </div>
+            </div>
+          </Section>
+          <Section title="기온">
+            <div
+              style={{
+                border: 'none',
+                height: 56,
+                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                borderRadius: 8,
+                position: 'relative',
+                padding: '12px',
+                maxWidth: 164,
+              }}
+            >
+              <input
+                name="temp"
+                style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+                placeholder="기온"
+                type="number"
+                onChange={(e) => {
+                  setTemp(e.target.value);
+                }}
+                value={temp}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  right: 10,
+                  top: 21,
+                }}
+              >
+                ℃
+              </div>
+            </div>
+          </Section>
         </div>
-      </Section>
-      <Section title="수면해류">
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <input
-            type="radio"
-            id="STRONG"
-            value="STRONG"
-            checked={surfaceFlow === 'STRONG'}
-            onClick={handleOptionChange2}
-          />
-          <label for="STRONG" style={{ padding: '8px 24px' }}>
-            강한해류
-          </label>
-          <input
-            type="radio"
-            value="MIDDLE"
-            id="MIDDLE"
-            checked={surfaceFlow === 'MIDDLE'}
-            onClick={handleOptionChange2}
-          />
-          <label for="MIDDLE" style={{ padding: '8px 24px' }}>
-            보통해류
-          </label>
-          <input
-            type="radio"
-            id="WEEK"
-            value="WEEK"
-            checked={surfaceFlow === 'WEEK'}
-            onClick={handleOptionChange2}
-          />
-          <label for="WEEK" style={{ padding: '8px 24px' }}>
-            약한해류
-          </label>
+      )}
+      {category !== 'SNORKEL' && category !== 'FREEDIVING' && (
+        <div style={{ display: 'flex', justifyContent: 'space-between' }} className="space-x-4">
+          <Section title="입수전 잔량">
+            <div
+              style={{
+                border: 'none',
+                height: 56,
+                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                borderRadius: 8,
+                position: 'relative',
+                padding: 12,
+                maxWidth: 164,
+              }}
+            >
+              <input
+                name="beforeIntake"
+                placeholder="입수전 잔량"
+                type="number"
+                style={{
+                  border: 'none',
+                  width: '100%',
+                  height: '100%',
+                  outline: 'none',
+                }}
+                onChange={(e) => {
+                  setBeforeIntake(e.target.value);
+                }}
+                value={beforeIntake}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  right: 10,
+                  top: 21,
+                }}
+              >
+                bar
+              </div>
+            </div>
+          </Section>
+          <Section title="입수후 잔량">
+            <div
+              style={{
+                border: 'none',
+                height: 56,
+                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                borderRadius: 8,
+                position: 'relative',
+                padding: 12,
+                maxWidth: 164,
+              }}
+            >
+              <input
+                name="afterIntake"
+                style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+                placeholder="입수후 잔량"
+                type="number"
+                onChange={(e) => {
+                  setAfterIntake(e.target.value);
+                }}
+                value={afterIntake}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  right: 10,
+                  top: 21,
+                }}
+              >
+                bar
+              </div>
+            </div>
+          </Section>
         </div>
-      </Section>
-      <Section title="심층해류">
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <input
-            type="radio"
-            id="STRONG2"
-            value="STRONG"
-            checked={deepFlow === 'STRONG'}
-            onClick={handleOptionChange3}
-          />
-          <label for="STRONG2" style={{ padding: '8px 24px' }}>
-            강한해류
-          </label>
-          <input
-            type="radio"
-            id="MIDDLE2"
-            value="MIDDLE"
-            checked={deepFlow === 'MIDDLE'}
-            onClick={handleOptionChange3}
-          />
-          <label for="MIDDLE2" style={{ padding: '8px 24px' }}>
-            보통해류
-          </label>
-          <input
-            type="radio"
-            value="WEEK"
-            id="WEEK2"
-            checked={deepFlow === 'WEEK'}
-            onClick={handleOptionChange3}
-          />
-          <label for="WEEK2" style={{ padding: '8px 24px' }}>
-            약한해류
-          </label>
+      )}
+      {category !== 'SNORKEL' && category !== 'FREEDIVING' && (
+        <div style={{ display: 'flex', justifyContent: 'space-between' }} className=" space-x-4">
+          <Section title="다이브 최고수심">
+            <div
+              style={{
+                border: 'none',
+                height: 56,
+                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                borderRadius: 8,
+                position: 'relative',
+                padding: 12,
+                maxWidth: 164,
+              }}
+            >
+              <input
+                name="maxDepth"
+                style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+                placeholder="다이브 최고수심"
+                type="number"
+                onChange={(e) => {
+                  setMaxDepth(e.target.value);
+                }}
+                value={maxDepth}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  right: 10,
+                  top: 21,
+                }}
+              >
+                M
+              </div>
+            </div>
+          </Section>
+          <Section title="포인트 수심">
+            <div
+              style={{
+                border: 'none',
+                height: 56,
+                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                borderRadius: 8,
+                position: 'relative',
+                padding: 12,
+                maxWidth: 164,
+              }}
+            >
+              <input
+                name="pointDepth"
+                style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+                type="number"
+                placeholder="포인트 수심"
+                onChange={(e) => {
+                  setPointDepth(e.target.value);
+                }}
+                value={pointDepth}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  right: 10,
+                  top: 21,
+                }}
+              >
+                M
+              </div>
+            </div>
+          </Section>
         </div>
-      </Section>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Section title="수온">
-          <div
-            style={{
-              width: '164px',
-              border: 'none',
-              height: 56,
-              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              borderRadius: 8,
-              position: 'relative',
-              padding: 12,
-            }}
-          >
-            <input
-              name="waterTemp"
-              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
-              placeholder="수온"
-              onChange={(e) => {
-                setWaterTemp(e.target.value);
-              }}
-              type="number"
-              value={waterTemp}
-            />
+      )}
+      {category !== 'SNORKEL' && category !== 'FREEDIVING' && (
+        <div style={{ display: 'flex', justifyContent: 'space-between' }} className=" space-x-4">
+          <Section title="다이빙 시간">
             <div
               style={{
-                position: 'absolute',
-                right: 10,
-                top: 21,
+                border: 'none',
+                height: 56,
+                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                borderRadius: 8,
+                position: 'relative',
+                padding: 12,
+                maxWidth: 164,
               }}
             >
-              ℃
+              <input
+                name="diveTime"
+                placeholder="다이빙 시간"
+                style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+                onChange={(e) => {
+                  setDiveTime(e.target.value);
+                }}
+                value={diveTime}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  right: 10,
+                  top: 21,
+                }}
+              >
+                분
+              </div>
             </div>
-          </div>
-        </Section>
-        <Section title="기온">
-          <div
-            style={{
-              width: '164px',
-              border: 'none',
-              height: 56,
-              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              borderRadius: 8,
-              position: 'relative',
-              padding: 12,
-            }}
-          >
-            <input
-              name="temp"
-              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
-              placeholder="기온"
-              type="number"
-              onChange={(e) => {
-                setTemp(e.target.value);
-              }}
-              value={temp}
-            />
+          </Section>
+          <Section title="감압 시간">
             <div
               style={{
-                position: 'absolute',
-                right: 10,
-                top: 21,
+                border: 'none',
+                height: 56,
+                boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+                borderRadius: 8,
+                position: 'relative',
+                padding: 12,
+                maxWidth: 164,
               }}
             >
-              ℃
+              <input
+                name="decompression"
+                placeholder="감압 시간"
+                style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+                onChange={(e) => {
+                  setDecompression(e.target.value);
+                }}
+                value={decompression}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  right: 10,
+                  top: 21,
+                }}
+              >
+                분
+              </div>
             </div>
-          </div>
-        </Section>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Section title="입수전 잔량">
+          </Section>
+        </div>
+      )}
+      {category !== 'SNORKEL' && (
+        <Section title="시야">
           <div
             style={{
-              width: '164px',
+              width: '100%',
               border: 'none',
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
@@ -515,82 +780,14 @@ const Write = () => {
             }}
           >
             <input
-              name="beforeIntake"
-              placeholder="입수전 잔량"
+              name="eyesight"
+              placeholder="시야"
               type="number"
               style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
               onChange={(e) => {
-                setBeforeIntake(e.target.value);
+                setEyesight(e.target.value);
               }}
-              value={beforeIntake}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                right: 10,
-                top: 21,
-              }}
-            >
-              bar
-            </div>
-          </div>
-        </Section>
-        <Section title="입수후 잔량">
-          <div
-            style={{
-              width: '164px',
-              border: 'none',
-              height: 56,
-              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              borderRadius: 8,
-              position: 'relative',
-              padding: 12,
-            }}
-          >
-            <input
-              name="afterIntake"
-              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
-              placeholder="입수후 잔량"
-              type="number"
-              onChange={(e) => {
-                setAfterIntake(e.target.value);
-              }}
-              value={afterIntake}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                right: 10,
-                top: 21,
-              }}
-            >
-              bar
-            </div>
-          </div>
-        </Section>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Section title="다이브 최고수심">
-          <div
-            style={{
-              width: '164px',
-              border: 'none',
-              height: 56,
-              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              borderRadius: 8,
-              position: 'relative',
-              padding: 12,
-            }}
-          >
-            <input
-              name="maxDepth"
-              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
-              placeholder="다이브 최고수심"
-              type="number"
-              onChange={(e) => {
-                setMaxDepth(e.target.value);
-              }}
-              value={maxDepth}
+              value={eyesight}
             />
             <div
               style={{
@@ -603,139 +800,7 @@ const Write = () => {
             </div>
           </div>
         </Section>
-        <Section title="포인트 수심">
-          <div
-            style={{
-              width: '164px',
-              border: 'none',
-              height: 56,
-              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              borderRadius: 8,
-              position: 'relative',
-              padding: 12,
-            }}
-          >
-            <input
-              name="pointDepth"
-              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
-              type="number"
-              placeholder="포인트 수심"
-              onChange={(e) => {
-                setPointDepth(e.target.value);
-              }}
-              value={pointDepth}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                right: 10,
-                top: 21,
-              }}
-            >
-              M
-            </div>
-          </div>
-        </Section>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Section title="다이빙 시간">
-          <div
-            style={{
-              width: '164px',
-              border: 'none',
-              height: 56,
-              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              borderRadius: 8,
-              position: 'relative',
-              padding: 12,
-            }}
-          >
-            <input
-              name="diveTime"
-              placeholder="다이빙 시간"
-              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
-              onChange={(e) => {
-                setDiveTime(e.target.value);
-              }}
-              value={diveTime}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                right: 10,
-                top: 21,
-              }}
-            >
-              분
-            </div>
-          </div>
-        </Section>
-        <Section title="감압 시간">
-          <div
-            style={{
-              width: '164px',
-              border: 'none',
-              height: 56,
-              boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-              borderRadius: 8,
-              position: 'relative',
-              padding: 12,
-            }}
-          >
-            <input
-              name="decompression"
-              placeholder="감압 시간"
-              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
-              onChange={(e) => {
-                setDecompression(e.target.value);
-              }}
-              value={decompression}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                right: 10,
-                top: 21,
-              }}
-            >
-              분
-            </div>
-          </div>
-        </Section>
-      </div>
-      <Section title="시야">
-        <div
-          style={{
-            width: '100%',
-            border: 'none',
-            height: 56,
-            boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-            borderRadius: 8,
-            position: 'relative',
-            padding: 12,
-          }}
-        >
-          <input
-            name="eyesight"
-            placeholder="시야"
-            type="number"
-            style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
-            onChange={(e) => {
-              setEyesight(e.target.value);
-            }}
-            value={eyesight}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              right: 10,
-              top: 21,
-            }}
-          >
-            M
-          </div>
-        </div>
-      </Section>
+      )}
     </div>
   );
 };
