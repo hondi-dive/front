@@ -11,3 +11,13 @@ export const fetchDetailPoint = async (id) => {
 
   return res;
 };
+
+export const createPoint = async (data) => {
+  const headers = {
+    'Content-Type': 'multipart/form-data',
+  };
+
+  const res = await axios.post(`/diveposts`, data, headers);
+
+  return res;
+};

@@ -1,10 +1,11 @@
 import Axios from 'axios';
 
-export const createApi = () => {
+export const createApi = (headers) => {
   const _customAxios = Axios.create({
-    baseURL: 'http://172.30.1.54:3000',
+    baseURL: 'http://172.30.1.85:3000',
     withCredentials: true,
     validateStatus: (status) => status >= 200 && status < 400,
+    headers: headers,
   });
 
   _customAxios.interceptors.response.use(
