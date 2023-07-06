@@ -11,8 +11,38 @@ const FeedDetail = () => {
           <FeedProfileName>CHERSISHER</FeedProfileName>
         </FeedProfile>
         <FeedContent>
-            <img src="/img/sample-feed.png"></img>
+          <img src="/img/sample-feed.png" width="100%" />
         </FeedContent>
+        <div
+          style={{
+            display: 'inline-flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            margin: '24px 0',
+          }}
+        >
+          <div
+            style={{
+              fontSize: 24,
+              fontWeight: 600,
+              marginRight: 17,
+            }}
+          >
+            🥽 스쿠버다이빙
+          </div>
+          <img
+            src="/img/active-star.svg"
+            width={24}
+            height={24}
+            style={{
+              marginRight: 7,
+            }}
+          />
+          <div>
+            <span style={{ color: '#327AEB' }}>4</span>/5점
+          </div>
+        </div>
+        홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합홍합
       </FeedContainer>
     </Container>
   );
@@ -21,7 +51,6 @@ const FeedDetail = () => {
 export default FeedDetail;
 
 const Container = styled.div`
-  background-color: #fafafa;
   padding-top: 60px;
 `;
 
@@ -29,9 +58,8 @@ const FeedContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 25px;
+
   background-color: #fff;
-  border: 1px solid #e6e6e6;
   border-radius: 5px;
   margin: 20px;
 `;
@@ -50,17 +78,9 @@ const FeedProfileImage = styled.img`
   margin-right: 10px;
 `;
 
-
 const FeedProfileName = styled.div`
   font-weight: bold;
   line-height: 40px;
 `;
 
-const FeedContent = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  margin: 
-  border-radius: 30px;
-  width: 100%;
-`;
+const FeedContent = styled.div``;
