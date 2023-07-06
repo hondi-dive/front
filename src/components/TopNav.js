@@ -36,7 +36,7 @@ export default TopNav;
 
 export const NavbarContainer = styled.div`
   width: 100%;
-  height: 50px;
+  height: 64px;
   flex-shrink: 0;
   background: #fff;
   box-shadow: 0px 0px 12px 3px rgba(56, 56, 56, 0.1);
@@ -52,6 +52,7 @@ export const NavbarContainer = styled.div`
   max-width: 393px;
   margin: 0 auto;
   z-index: 99;
+  padding: 0 24px;
 `;
 
 export const NavbarPosition = styled.div`

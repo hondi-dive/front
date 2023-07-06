@@ -98,9 +98,9 @@ const Write = () => {
   };
   return (
     <div
-      // style={{
-      //   padding: '0px 24px 0 24px',
-      // }}
+      style={{
+        padding: '0px 24px 0 24px',
+      }}
     >
       <TopNav
         title="나의 로그 작성하기"
@@ -115,8 +115,7 @@ const Write = () => {
           fontSize: 24,
           fontWeight: 600,
           marginBottom: 40,
-          marginTop: 40,
-          paddingTop: 40,
+          marginTop: 104,
         }}
       >
         나의 물질을 자랑해줍서
@@ -293,22 +292,29 @@ const Write = () => {
           value={date}
         />
       </Section>
-
-      <input
-        name="text"
-        style={{
-          width: '100%',
-          border: 'none',
-          boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
-          borderRadius: 8,
-          padding: 8,
-        }}
-        placeholder="후기를 작성해주십쇼"
-        onChange={(e) => {
-          setText(e.target.value);
-        }}
-        value={text}
-      />
+      <Section title="테스트">
+        <textarea
+          className="scrollbar-hide h-8 w-full resize-none pt-2 pl-4 text-sm font-thin"
+          style={{
+            lineHeight: 1.5,
+            width: '100%',
+            padding: 12,
+            boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+            borderRadius: 8,
+            resize: 'none',
+          }}
+          value={text}
+          onChange={(e) => {
+            setText(e.target.value);
+          }}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              handleConfirm(e);
+            }
+          }}
+          placeholder="후기를 작성해줍서!"
+        />
+      </Section>
 
       <Section title="입수형태">
         <div
@@ -419,118 +425,206 @@ const Write = () => {
       </Section>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Section title="수온">
-          <input
-            name="waterTemperature"
+          <div
             style={{
-              width: '100%',
+              width: '164px',
               border: 'none',
+              height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
-              padding: 8,
-              height: 56,
+              position: 'relative',
+              padding: 12,
             }}
-            placeholder="수온"
-            onChange={(e) => {
-              setWaterTemperature(e.target.value);
-            }}
-            type="number"
-            value={waterTemperature}
-          />
+          >
+            <input
+              name="waterTemperature"
+              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+              placeholder="수온"
+              onChange={(e) => {
+                setWaterTemperature(e.target.value);
+              }}
+              type="number"
+              value={waterTemperature}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: 21,
+              }}
+            >
+              ℃
+            </div>
+          </div>
         </Section>
         <Section title="기온">
-          <input
-            name="temperature"
+          <div
             style={{
-              width: '100%',
+              width: '164px',
               border: 'none',
+              height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
-              padding: 8,
-              height: 56,
+              position: 'relative',
+              padding: 12,
             }}
-            placeholder="기온"
-            type="number"
-            onChange={(e) => {
-              setTemperature(e.target.value);
-            }}
-            value={temperature}
-          />
+          >
+            <input
+              name="temperature"
+              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+              placeholder="기온"
+              type="number"
+              onChange={(e) => {
+                setTemperature(e.target.value);
+              }}
+              value={temperature}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: 21,
+              }}
+            >
+              ℃
+            </div>
+          </div>
         </Section>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Section title="입수전 잔량">
-          <input
-            name="beforeIntake"
-            placeholder="입수전 잔량"
-            type="number"
+          <div
             style={{
               width: '164px',
-              height: 56,
               border: 'none',
+              height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
+              position: 'relative',
+              padding: 12,
             }}
-            onChange={(e) => {
-              setBeforeIntake(e.target.value);
-            }}
-            value={beforeIntake}
-          />
+          >
+            <input
+              name="beforeIntake"
+              placeholder="입수전 잔량"
+              type="number"
+              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+              onChange={(e) => {
+                setBeforeIntake(e.target.value);
+              }}
+              value={beforeIntake}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: 21,
+              }}
+            >
+              bar
+            </div>
+          </div>
         </Section>
         <Section title="입수후 잔량">
-          <input
-            name="afterIntake"
+          <div
             style={{
               width: '164px',
               border: 'none',
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
+              position: 'relative',
+              padding: 12,
             }}
-            placeholder="입수후 잔량"
-            type="number"
-            onChange={(e) => {
-              setAfterIntake(e.target.value);
-            }}
-            value={afterIntake}
-          />
+          >
+            <input
+              name="afterIntake"
+              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+              placeholder="입수후 잔량"
+              type="number"
+              onChange={(e) => {
+                setAfterIntake(e.target.value);
+              }}
+              value={afterIntake}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: 21,
+              }}
+            >
+              bar
+            </div>
+          </div>
         </Section>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Section title="다이브 최고수심">
-          <input
-            name="highestDepth"
-            placeholder="다이브 최고수심"
-            type="number"
+          <div
             style={{
               width: '164px',
               border: 'none',
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
+              position: 'relative',
+              padding: 12,
             }}
-            onChange={(e) => {
-              setHighestDepth(e.target.value);
-            }}
-            value={highestDepth}
-          />
+          >
+            <input
+              name="highestDepth"
+              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+              placeholder="다이브 최고수심"
+              type="number"
+              onChange={(e) => {
+                setHighestDepth(e.target.value);
+              }}
+              value={highestDepth}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: 21,
+              }}
+            >
+              M
+            </div>
+          </div>
         </Section>
         <Section title="포인트 수심">
-          <input
-            name="pointDepth"
+          <div
             style={{
               width: '164px',
               border: 'none',
               height: 56,
               boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
               borderRadius: 8,
+              position: 'relative',
+              padding: 12,
             }}
-            type="number"
-            placeholder="포인트 수심"
-            onChange={(e) => {
-              setPointDepth(e.target.value);
-            }}
-            value={pointDepth}
-          />
+          >
+            <input
+              name="pointDepth"
+              style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+              type="number"
+              placeholder="포인트 수심"
+              onChange={(e) => {
+                setPointDepth(e.target.value);
+              }}
+              value={pointDepth}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: 21,
+              }}
+            >
+              M
+            </div>
+          </div>
         </Section>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -572,23 +666,37 @@ const Write = () => {
         </Section>
       </div>
       <Section title="시야">
-        <input
-          name="eyesight"
-          placeholder="시야"
-          type="number"
+        <div
           style={{
             width: '100%',
             border: 'none',
             height: 56,
             boxShadow: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
             borderRadius: 8,
-            padding: 8,
+            position: 'relative',
+            padding: 12,
           }}
-          onChange={(e) => {
-            setEyesight(e.target.value);
-          }}
-          value={eyesight}
-        />
+        >
+          <input
+            name="eyesight"
+            placeholder="시야"
+            type="number"
+            style={{ border: 'none', width: '100%', height: '100%', outline: 'none' }}
+            onChange={(e) => {
+              setEyesight(e.target.value);
+            }}
+            value={eyesight}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              right: 10,
+              top: 21,
+            }}
+          >
+            M
+          </div>
+        </div>
       </Section>
     </div>
   );
