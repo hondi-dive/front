@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-const Layout = ({ router }) => {
+const DefaultLayout = ({ router }) => {
   return <MainContainer>{router}</MainContainer>;
 };
 
-export default Layout;
+export default DefaultLayout;
 
 const MainContainer = styled.div`
   max-width: 396px;
