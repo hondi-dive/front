@@ -29,7 +29,7 @@ const Login = () => {
         <S.SocialLoginContainer>
           <div className=" relative p-1.5 shadow-lg">
             <input
-              className="p-2"
+              className="p-2 outline-0"
               onChange={(e) => {
                 setUserId(e.target.value);
               }}
@@ -39,7 +39,7 @@ const Login = () => {
                 setCookie('accessToken', userId, { path: '/', maxAge: 9999999999999 });
                 navigate(staticServerUri + '/points');
               }}
-              className="absolute right-[1px] top-[11px] cursor-pointer bg-[#327aeb] py-3 text-white px-3"
+              className="absolute right-[5px] top-[7px] cursor-pointer bg-[#327aeb] py-3 text-white px-3 "
             >
               제출
             </div>
