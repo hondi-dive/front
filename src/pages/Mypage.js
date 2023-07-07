@@ -1,9 +1,12 @@
-import TopNav from "components/TopNav";
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
+
+import TopNav from 'components/TopNav';
 import * as S from 'components/pages/mypage/Mypage.style';
 
 const Mypage = () => {
   const [category, setCategory] = useState('SNORKEL');
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
 
   return (
     <div>
@@ -12,10 +15,10 @@ const Mypage = () => {
 
       <S.ProfileWrapper>
         <S.ProfileCircle>
-            <S.ProfileImage src="./img/mypage.png" alt="Profile Image" />
+          <S.ProfileImage src="./img/mypage.png" alt="Profile Image" />
         </S.ProfileCircle>
-        <S.ProfileUsername>CHERSISHER</S.ProfileUsername>
-    </S.ProfileWrapper>
+        <S.ProfileUsername>{cookies.accessToken}</S.ProfileUsername>
+      </S.ProfileWrapper>
       <select
         onChange={(e) => {
           setCategory(e.target.value);
@@ -76,6 +79,6 @@ const Mypage = () => {
       </S.Wrap>
     </div>
   );
-}
+};
 
 export default Mypage;

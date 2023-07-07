@@ -16,7 +16,7 @@ export const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: 510px;    
+  height: 510px;
   align-content: center;
 `;
 
@@ -49,37 +49,37 @@ export const Long = styled.img`
 `;
 
 export const ProfileWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding-bottom: 20px;
-    padding-left: 25px;
-    `;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  padding-left: 25px;
+`;
 
 export const ProfileCircle = styled.div`
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #D9D9D9;
-    margin-right: 10px;
-    margin-top: -20px;
-    `;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  margin-right: 10px;
+  margin-top: -20px;
+`;
 export const ProfileImage = styled.img`
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #D9D9D9;
-    margin-right: 10px;
-    `;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  margin-right: 10px;
+`;
 
 export const ProfileUsername = styled.div`
-    font-family: Pretendard;
-    font-size: 15px;    
-    font-style: normal;
-    font-weight: 600;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
 
-    line-height: 18px;
-    letter-spacing: -0.3px;
-    text-transform: uppercase;
-    color: #000;
-    `;
+  line-height: 18px;
+  letter-spacing: -0.3px;
+
+  color: #000;
+`;
