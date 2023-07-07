@@ -1,15 +1,23 @@
 import axios from './index';
 
 export const fetchPoints = async () => {
-  const res = await axios.get('/points');
+  try {
+    const res = await axios.get('/points');
 
-  return res;
+    return res;
+  } catch (error) {
+    alert('서버 에러 입니다.');
+  }
 };
 
 export const fetchDetailPoint = async (id) => {
-  const res = await axios.get(`/divepost/${id}`);
+  try {
+    const res = await axios.get(`/divepost/${id}`);
 
-  return res;
+    return res;
+  } catch (error) {
+    alert('서버 에러 입니다.');
+  }
 };
 
 export const createPoint = async (data) => {
@@ -17,23 +25,35 @@ export const createPoint = async (data) => {
     'Content-Type': 'multipart/form-data',
   };
 
-  const res = await axios.post(`/diveposts`, data, headers);
+  try {
+    const res = await axios.post(`/diveposts`, data, headers);
 
-  return res;
+    return res;
+  } catch (error) {
+    alert('서버 에러 입니다.');
+  }
 };
 
 export const fetchFeed = async (id, filter) => {
-  if (filter) {
-    const res = await axios.get(`/diveposts/${id}?category=${filter}`);
-    return res;
-  } else {
-    const res = await axios.get(`/diveposts/${id}`);
-    return res;
+  try {
+    if (filter) {
+      const res = await axios.get(`/diveposts/${id}?category=${filter}`);
+      return res;
+    } else {
+      const res = await axios.get(`/diveposts/${id}`);
+      return res;
+    }
+  } catch (error) {
+    alert('서버 에러 입니다.');
   }
 };
 
 export const fetchDetailLog = async (id) => {
-  const res = await axios.get(`/diveposts/${id}/detail`);
+  try {
+    const res = await axios.get(`/diveposts/${id}/detail`);
 
-  return res;
+    return res;
+  } catch (error) {
+    alert('서버 에러 입니다.');
+  }
 };
