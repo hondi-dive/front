@@ -105,7 +105,7 @@ const Feed = () => {
                     navigate(staticServerUri + `/feed/${image.id}`);
                   }}
                 />
-                <img className="absolute right-3 top-3 w-11 h-11" src={dsa(image.category)} />
+                <img className="absolute right-3 top-3 w-7 h-7" src={dsa(image.category)} />
               </div>
             ))}
           </S.Gallery>
