@@ -18,7 +18,10 @@ export const TitleContainer = styled.div`
   padding-top: 150px;
   margin-bottom: 40px;
   text-align: center;
-  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 `;
 
 export const MainTitle = styled.div`
@@ -29,6 +32,7 @@ export const MainTitle = styled.div`
 export const SubTitle = styled.div`
   color: black;
   font-size: 18px;
+  margin-top: 30px;
 `;
 
 export const Title = styled.div`

@@ -180,7 +180,7 @@ const Write = () => {
           }}
         >
           <img
-            src="/img/location.svg"
+            src="./img/location.svg"
             width={24}
             height={24}
             style={{
@@ -234,7 +234,7 @@ const Write = () => {
             <img
               key={el}
               onClick={() => handleStarClick(el)}
-              src={star[el] ? '/img/active-star.svg' : '/img/star.svg'}
+              src={star[el] ? './img/active-star.svg' : './img/star.svg'}
               style={{
                 cursor: 'pointer',
               }}
@@ -287,7 +287,7 @@ const Write = () => {
               }}
               onClick={onUploadImageButtonClick}
             >
-              <img src="/img/plus.svg" width={28} height={28} />
+              <img src="./img/plus.svg" width={28} height={28} />
             </div>
           </div>
         )}
