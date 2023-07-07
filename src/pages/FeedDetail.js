@@ -50,7 +50,7 @@ const FeedDetail = () => {
   return (
     <Container>
       <TopNav
-        title="광치기 해변"
+        title={detail.pointName}
         actionName="공유하기"
         action={() => {
           const img = detail.imgUrl;
